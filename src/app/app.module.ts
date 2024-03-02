@@ -3,10 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [{ path: 'clientes', component: ClientesComponent }];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,
