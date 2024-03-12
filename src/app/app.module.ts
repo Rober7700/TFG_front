@@ -6,17 +6,34 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { CrearClienteComponent } from './clientes/crear-cliente/crear-cliente.component';
+import { FormsModule } from '@angular/forms';
+import { PaginatorComponent } from './paginator/paginator.component';
 
-const routes: Routes = [{ path: 'clientes', component: ClientesComponent }];
+const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'clientes', component: ClientesComponent },
+  { path: 'clientes/page/:page', component: ClientesComponent },
+  { path: 'clientes/crearCliente', component: CrearClienteComponent },
+  { path: 'clientes/crearCliente/:id', component: CrearClienteComponent },
+  { path: 'home', component: HomeComponent }];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ClientesComponent
+    ClientesComponent,
+    HomeComponent,
+    CrearClienteComponent,
+    PaginatorComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(routes),
     AppRoutingModule
   ],
   providers: [],
