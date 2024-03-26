@@ -22,6 +22,7 @@ export class ClientesComponent implements OnInit {
       if (!page) {
         page = 0;
       }
+      console.log(page);
       this.clienteService.getClientes(page).subscribe(response => {
         this.clientes = response.content as Cliente[];
         this.paginator = response;

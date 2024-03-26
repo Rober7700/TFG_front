@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { CrearClienteComponent } from './clientes/crear-cliente/crear-cliente.component';
 import { FormsModule } from '@angular/forms';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { PrendasComponent } from './prendas/prendas.component';
+import { CrearPrendaComponent } from './prendas/crear-prenda/crear-prenda.component';
+import { DetalleComponent } from './detalle/detalle.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,6 +21,12 @@ const routes: Routes = [
   { path: 'clientes/page/:page', component: ClientesComponent },
   { path: 'clientes/crearCliente', component: CrearClienteComponent },
   { path: 'clientes/crearCliente/:id', component: CrearClienteComponent },
+  
+  { path: 'prendas', component: PrendasComponent },
+  { path: 'prendas/page/:page', component: PrendasComponent },
+  { path: 'prendas/crearPrenda', component: CrearPrendaComponent },
+  { path: 'prendas/crearPrenda/:id', component: CrearPrendaComponent },
+
   { path: 'home', component: HomeComponent }];
 
 @NgModule({
@@ -28,6 +37,9 @@ const routes: Routes = [
     HomeComponent,
     CrearClienteComponent,
     PaginatorComponent,
+    PrendasComponent,
+    CrearPrendaComponent,
+    DetalleComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,24 @@
+
+.scrolling-text-container {
+    position: absolute;
+    top: 60px; /* Ajusta esta altura según la altura de tu navbar */
+    left: 0;
+    width: 100%;
+    background-color: white; /* Opcional: establece el color de fondo según tu diseño */
+    padding: 10px; /* Opcional: añade relleno si es necesario */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opcional: añade sombra */
+  }
+  
+  .scrolling-text {
+    white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+    animation: scrollLeft 10s linear infinite; /* Animación para desplazar el texto hacia la izquierda */
+  }
+  
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(100%); /* Inicia desde la derecha */
+    }
+    100% {
+      transform: translateX(-100%); /* Termina en la izquierda */
+    }
+  }
