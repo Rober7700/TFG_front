@@ -11,6 +11,7 @@
   
   .scrolling-text {
     white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+    overflow-x: hidden;
     animation: scrollLeft 10s linear infinite; /* Animación para desplazar el texto hacia la izquierda */
   }
   

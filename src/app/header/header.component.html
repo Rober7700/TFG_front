@@ -1,61 +1,56 @@
-<div>
-  <nav class="navbar bg-body-tertiary fixed-top">
-    <div class="container-fluid">
-      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title text-center" id="offcanvasNavbarLabel">Numen</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-            <!-- Inicio -->
-            <li class="nav-item" >
-              <a class="nav-link" [routerLink]="['/home']">Inicio</a>
-            </li>
-            <!-- Clientes -->
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/clientes/page/0']">Clientes</a>
-            </li>            
-            <!-- Prendas -->
-            <li class="nav-item" >
-              <a class="nav-link" [routerLink]="['/prendas/page/0']">Prendas</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Accesorios
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Joyas</a></li>
-                <li><a class="dropdown-item" href="#">Bolsos</a></li>
-                <li><a class="dropdown-item" href="#">Cinturones</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Zapatos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Marca</a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sobre nosotros</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contacto</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Colaboraciones</a>
-            </li>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/home']">Numen</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+      aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <!-- Clientes -->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/clientes/page/0']" *ngIf="isAdmin">Clientes</a>
+        </li>
+        <!-- Prendas -->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/prendas/page/0']" *ngIf="isAdmin">Prendas</a>
+        </li>
+        <!-- Accesorios -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Accesorios
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Joyas</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/user']">Bolsos</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/admin']">Cinturones</a></li>
           </ul>
-        </div>
-      </div>
+        </li>
+        <!-- Zapatos -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Zapatos</a>
+        </li>
+        <!-- Marca -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Marca</a>
+        </li>
+        <!-- >Sobre nosotros -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sobre nosotros</a>
+        </li>
+        <!-- Contacto -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacto</a>
+        </li>
+        <!-- Colaboraciones -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Colaboraciones</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <button class="btn btn-outline-success" type="button" (click)="onLogin()" *ngIf="!isLogged">Login</button>
+        <button class="btn btn-outline-danger" type="button" (click)="onLogout()" *ngIf="isLogged">Logout</button>
+      </form>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>

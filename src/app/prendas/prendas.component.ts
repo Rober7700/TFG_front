@@ -68,11 +68,8 @@ export class PrendasComponent implements OnInit {
     })
   }
 
-
   abrirModal(prenda: Prenda) {
     this.prendaSeleccionada = prenda;
     this.modalService.abrirModal();
   }
-
-
 }
