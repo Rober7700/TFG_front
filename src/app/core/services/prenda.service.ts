@@ -17,6 +17,15 @@ export class PrendaService {
 
   constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
+  private agregarAuth(){
+    let httpHeaders = new HttpHeaders();
+    const token = this.tokenService.getAccessToken();
+    if (token != null) {
+      return httpHeaders.append('Authorization', 'Bearer ' + token);
+    }
+    return this.httpHeaders;
+  }
+
   private isNoAutorizado(e): boolean {
     if (e.status == 401) {
       if (this.tokenService.isLogged()){
@@ -33,7 +42,7 @@ export class PrendaService {
   }
 
   getPrendas(page: number): Observable<any> {
-    return this.http.get(this.urlEndPoint + '/page/' + page)
+    return this.http.get(this.urlEndPoint + '/page/' + page, {headers: this.agregarAuth()})
     .pipe(
       map((response) => response as Prenda[]),
       catchError(e => {
@@ -44,7 +53,7 @@ export class PrendaService {
   }
 
   create(prenda: Prenda): Observable<any> {
-    return this.http.post(this.urlEndPoint, prenda, { headers: this.httpHeaders }).pipe(
+    return this.http.post(this.urlEndPoint, prenda, { headers: this.agregarAuth() }).pipe(
       map((response: any) => response.data as Prenda),
       catchError(e => {
 
@@ -79,8 +88,17 @@ export class PrendaService {
     );
   }
 
+  getPrendasPorTipo(tipo: string): Observable<any> {
+    return this.http.get<any>(this.urlEndPoint + '/tipo/' + tipo).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e)
+        return throwError(() => (e));
+      })
+    );
+  }
+
   update(prenda: Prenda): Observable<Prenda> {
-    return this.http.put<Prenda>(`${this.urlEndPoint}/${prenda.id}`, prenda, { headers: this.httpHeaders }).pipe(
+    return this.http.put<Prenda>(`${this.urlEndPoint}/${prenda.id}`, prenda, { headers: this.agregarAuth() }).pipe(
       map((response: any) => response.data as Prenda),
       catchError(e => {
 
@@ -100,7 +118,7 @@ export class PrendaService {
   }
 
   delete(id: number): Observable<Prenda> {
-    return this.http.delete<Prenda>(`${this.urlEndPoint}/${id}`, { headers: this.httpHeaders }).pipe(
+    return this.http.delete<Prenda>(`${this.urlEndPoint}/${id}`, { headers: this.agregarAuth() }).pipe(
       catchError(e => {
 
         if (this.isNoAutorizado(e)) {

@@ -5,6 +5,7 @@ import * as CryptoJS from 'crypto-js';
 const ACCESS_TOKEN = 'access_token';
 const REFRESH_TOKEN = 'refresh_token';
 const CODE_VERIFIER = 'code_verifier';
+const CLIENTE_ID = 'clienteId';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class TokenService {
   constructor() { }
 
   setTokens(access_token: string, refresh_token: string): void {
+    localStorage.removeItem(CLIENTE_ID);
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.setItem(ACCESS_TOKEN, access_token);
     localStorage.removeItem(REFRESH_TOKEN);
@@ -31,6 +33,7 @@ export class TokenService {
   clear(): void {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem(REFRESH_TOKEN);
+    localStorage.removeItem(CLIENTE_ID);
   }
 
   isLogged(): boolean {
@@ -52,13 +55,18 @@ export class TokenService {
     return true;
   }
 
-  isTokenExpirado(): boolean {
+  usuarioRegistrado() {
     let payload;
     const token = this.getAccessToken();
     if (token != null) {
       payload =  JSON.parse(atob(token.split(".")[1]));
       console.log(payload);
+      return payload.username;
     }
+  }
+
+  isTokenExpirado(): boolean {
+    let payload = this.usuarioRegistrado();
     let now = new Date().getTime() / 1000;
     if (payload.exp < now) {
       return true;

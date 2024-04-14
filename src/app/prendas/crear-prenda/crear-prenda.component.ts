@@ -13,6 +13,8 @@ export class CrearPrendaComponent implements OnInit {
 
   prenda: Prenda = new Prenda()
   titulo: string = "Crear Prenda"
+  tipos: string[] = ["ROPA", "ZAPATO", "JOYA", "BOLSO", "CINTURON"];
+
 
   errores: string[]
 

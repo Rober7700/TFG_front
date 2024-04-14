@@ -19,7 +19,15 @@ import { ResourceInterceptor } from './interceptors/resource.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { LogoutComponent } from './logout/logout.component';
-import { authGuard } from './guards/auth.guard';
+import { RopaComponent } from './ropa/ropa.component';
+import { ZapatosComponent } from './zapatos/zapatos.component';
+import { JoyasComponent } from './joyas/joyas.component';
+import { CinturonesComponent } from './cinturones/cinturones.component';
+import { BolsosComponent } from './bolsos/bolsos.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { FinPedidoComponent } from './fin-pedido/fin-pedido.component';
+import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
+import { ArchivadorComponent } from './archivador/archivador.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,15 +38,26 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'logout', component: LogoutComponent },
   
+  { path: 'ropa', component: RopaComponent },
+  { path: 'zapatos', component: ZapatosComponent },
+  { path: 'joyas', component: JoyasComponent },
+  { path: 'cinturones', component: CinturonesComponent },
+  { path: 'bolsos', component: BolsosComponent },
+
   { path: 'clientes', component: ClientesComponent },
   { path: 'clientes/page/:page', component: ClientesComponent },
   { path: 'clientes/crearCliente', component: CrearClienteComponent },
   { path: 'clientes/crearCliente/:id', component: CrearClienteComponent },
   
-  { path: 'prendas', component: PrendasComponent, canActivate:[authGuard] },
-  { path: 'prendas/page/:page', component: PrendasComponent, canActivate:[authGuard] },
-  { path: 'prendas/crearPrenda', component: CrearPrendaComponent, canActivate:[authGuard] },
-  { path: 'prendas/crearPrenda/:id', component: CrearPrendaComponent, canActivate:[authGuard] }];
+  { path: 'prendas', component: PrendasComponent },
+  { path: 'prendas/page/:page', component: PrendasComponent },
+  { path: 'prendas/crearPrenda', component: CrearPrendaComponent},
+  { path: 'prendas/crearPrenda/:id', component: CrearPrendaComponent },
+  
+  { path: 'archivador', component: ArchivadorComponent },
+  { path: 'carrito', component: CarritoComponent },
+  { path: 'finPedido', component: FinPedidoComponent },
+  { path: 'misPedidos', component: MisPedidosComponent }];
 
 @NgModule({
   declarations: [
@@ -55,6 +74,15 @@ const routes: Routes = [
     AdminComponent,
     UserComponent,
     LogoutComponent,
+    RopaComponent,
+    ZapatosComponent,
+    JoyasComponent,
+    CinturonesComponent,
+    BolsosComponent,
+    CarritoComponent,
+    FinPedidoComponent,
+    MisPedidosComponent,
+    ArchivadorComponent,
   ],
   imports: [
     BrowserModule,

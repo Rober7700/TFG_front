@@ -1,0 +1,40 @@
+<div class="card border-primary mb-3" *ngIf="!listaVacia">
+    <div class="card-header">Archivador</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Archivador</h5>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Imagen</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Carrito</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let archivador of archivadorPrendas; let i = index" [class.table-primary]="i % 2 !== 0">
+            <td>
+              <img *ngIf="archivador?.imagen" 
+              src="http://localhost:8080/almacen/prendas/img/{{archivador.imagen}}" alt="{{archivador.imagen}}" class="img-thumbnail rounded"
+              style="width: 64px; cursor:pointer;">
+              
+              <img *ngIf="!archivador?.imagen" 
+              src="http://localhost:8080/img/IconoMas.png" class="img-thumbnail rounded"
+              style="width: 64px; cursor:pointer;">
+            </td>
+            <td>{{ archivador.descripcion }}</td>
+            <td>{{ archivador.precio }}</td>
+            <td>
+              <button type="button" name="agregar" (click)="addCarrito(prenda.id)" class="btn btn-primary btn-sm">Carrito</button>
+            </td>
+            <td>
+              <button type="button" name="eliminar" (click)='delete(archivador.prendaId)'
+                class="btn btn-danger btn-sm">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

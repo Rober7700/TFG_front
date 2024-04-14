@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { TokenService } from '../core/services/token.service';
+import { ClienteService } from '../core/services/cliente.service';
+
+const CLIENTE_ID = 'clienteId';
 
 @Component({
   selector: 'app-autorized',
@@ -16,6 +19,7 @@ export class AuthorizedComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private tokenService: TokenService,
+    private clienteService: ClienteService,
     private router:Router,
   ) { }
 
@@ -32,6 +36,11 @@ export class AuthorizedComponent implements OnInit {
     this.authService.getToken(code, code_verifier).subscribe(
       data => {
        this.tokenService.setTokens(data.access_token, data.refresh_token);
+       let user = this.tokenService.usuarioRegistrado();
+       this.clienteService.getCliente(user).subscribe( response => {
+        localStorage.setItem(CLIENTE_ID, response.id);
+        console.log(response);
+      });
        this.router.navigate(['']);
       },
       err => {

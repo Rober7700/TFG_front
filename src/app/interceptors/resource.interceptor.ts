@@ -14,13 +14,12 @@ export class ResourceInterceptor implements HttpInterceptor {
   constructor(private tokenService: TokenService) {}
 
   claseAdmin(url:string):boolean{
-    return url.includes('resource') || url.includes('almacen') || url.includes('clientes');
+    return url.includes('resource') || url.includes('almacen') || url.includes('api')|| url.includes('carrito');
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let intReq = request;
     const token = this.tokenService.getAccessToken();
-    console.log(request);
     if(token != null && this.claseAdmin(request.url)) {
       intReq = request.clone({headers: request.headers.set('Authorization', 'Bearer ' + token)});
     }

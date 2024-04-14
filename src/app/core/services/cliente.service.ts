@@ -4,6 +4,7 @@ import { Observable, map, catchError, throwError } from "rxjs";
 import { Cliente } from "../classes/cliente";
 import { Router } from "@angular/router";
 import Swal from "sweetalert2";
+import { TokenService } from "./token.service";
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,16 @@ export class ClienteService {
 
     private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
     
-    constructor(private http:HttpClient, private router:Router) {    }
+    constructor(private http:HttpClient, private router:Router, private tokenService: TokenService) {    }
+
+    private agregarAuth(){
+      let httpHeaders = new HttpHeaders();
+      const token = this.tokenService.getAccessToken();
+      if (token != null) {
+        return httpHeaders.append('Authorization', 'Bearer ' + token);
+      }
+      return this.httpHeaders;
+    }
 
     getClientes(page:number): Observable<any> {
         return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
@@ -37,9 +47,8 @@ export class ClienteService {
           })
         );
     }
-
-    getCliente(id: number): Observable<any> {
-        return this.http.get<any>(`${this.urlEndPoint}/${id}`).pipe(
+    getCliente(email: String): Observable<any> {
+        return this.http.get<any>(`${this.urlEndPoint}/${email}`, {headers: this.agregarAuth()}).pipe(
           catchError(e => {
             this.router.navigate(['/clientes']);
             console.log(e);

@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="['/home']">Numen</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-      aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
@@ -13,7 +13,11 @@
         </li>
         <!-- Prendas -->
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/prendas/page/0']" *ngIf="isAdmin">Prendas</a>
+          <a class="nav-link" [routerLink]="['/prendas/page/0']" *ngIf="isAdmin">Inventario</a>
+        </li>
+        <!-- Prendas -->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/ropa']">Ropa</a>
         </li>
         <!-- Accesorios -->
         <li class="nav-item dropdown">
@@ -21,14 +25,15 @@
             Accesorios
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Joyas</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/user']">Bolsos</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/admin']">Cinturones</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/joyas']">Joyas</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/bolsos']">Bolsos</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/cinturones']">Cinturones</a></li>
           </ul>
         </li>
+
         <!-- Zapatos -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Zapatos</a>
+          <a class="nav-link" [routerLink]="['/zapatos']">Zapatos</a>
         </li>
         <!-- Marca -->
         <li class="nav-item">
@@ -47,6 +52,14 @@
           <a class="nav-link" href="#">Colaboraciones</a>
         </li>
       </ul>
+      <!-- Archivador -->
+      <button class="btn btn-outline-info" type="button" [routerLink]="['/archivador']" *ngIf="isLogged && !isAdmin">Archivador</button>
+      <!-- MisPedidos -->
+      <button class="btn btn-outline-warning" type="button" [routerLink]="['/misPedidos']" *ngIf="isLogged && !isAdmin">Mis Pedidos</button>
+      <button class="btn btn-outline-warning" type="button" [routerLink]="['/misPedidos']" *ngIf="isAdmin">Pedidos</button>
+      <!-- Carrito -->
+      <button class="btn btn-outline-success" type="button" [routerLink]="['/carrito']" *ngIf="isLogged">Carrito</button>
+      <!-- Loggearse -->
       <form class="d-flex" role="search">
         <button class="btn btn-outline-success" type="button" (click)="onLogin()" *ngIf="!isLogged">Login</button>
         <button class="btn btn-outline-danger" type="button" (click)="onLogout()" *ngIf="isLogged">Logout</button>

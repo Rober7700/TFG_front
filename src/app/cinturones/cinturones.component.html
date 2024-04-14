@@ -1,0 +1,41 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Cinturones</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Listado de cinturones</h5>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="width: 50px;">Imagen</th>
+            <th>id</th>
+            <th>Color</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Archivador</th>
+            <th>Carrito</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prenda of prendas; let i = index" [class.table-primary]="i % 2 !== 0">
+            <td>
+              <img *ngIf="prenda?.foto" src="http://localhost:8080/almacen/prendas/img/{{prenda.foto}}" alt="{{prenda.foto}}" 
+              class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">
+              
+              <img *ngIf="!prenda?.foto" src="http://localhost:8080/img/IconoMas.png" alt="{{prenda.foto}}" 
+              class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">
+            </td>
+            <td>{{ prenda.id }}</td>
+            <td>{{ prenda.color }}</td>
+            <td>{{ prenda.descripcion }}</td>
+            <td>{{ prenda.precio }}</td>
+            <td>
+              <button type="button" name="agregar" (click)="addArchivador(prenda.id)" class="btn btn-primary btn-sm">Archivador</button>
+            </td>
+            <td>
+              <button type="button" name="agregar" (click)="addCarrito(prenda.id)" class="btn btn-primary btn-sm">Carrito</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

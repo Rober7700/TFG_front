@@ -13,6 +13,7 @@
         <tr>
           <th style="width: 50px;">Imagen</th>
           <th>id</th>
+          <th>Tipo</th>
           <th>Talla</th>
           <th>Color</th>
           <th>Descripcion</th>
@@ -24,17 +25,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let prenda of prendas; let i = index" [class.table-primary]="i % 2 !== 0">
-          <td>                  
+          <td>
             <img (click)="abrirModal(prenda)" *ngIf="prenda?.foto" 
-            src="http://localhost:8080/almacen/uploads/img/{{prenda.foto}}" alt="{{prenda.foto}}" class="img-thumbnail rounded"
+            src="http://localhost:8080/almacen/prendas/img/{{prenda.foto}}" alt="{{prenda.foto}}" class="img-thumbnail rounded"
             style="width: 64px; cursor:pointer;">
             
             <img (click)="abrirModal(prenda)" *ngIf="!prenda?.foto" 
             src="http://localhost:8080/img/IconoMas.png" alt="{{prenda.foto}}" class="img-thumbnail rounded"
             style="width: 64px; cursor:pointer;">
-
           </td>
           <td>{{ prenda.id }}</td>
+          <td>{{ prenda.tipo}}</td>
           <td>{{ prenda.talla }}</td>
           <td>{{ prenda.color }}</td>
           <td>{{ prenda.descripcion }}</td>

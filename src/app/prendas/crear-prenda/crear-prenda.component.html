@@ -1,52 +1,62 @@
 <ul class="alert alert-danger" *ngIf="errores?.length > 0">
-    <li *ngFor="let err of errores">
-      {{  err  }}
-    </li>
-  </ul>
-  <div class="card bg-dark text-white">
-      <div class="card-header">{{ titulo }}</div>
-      <div class="card-body">
-    
-        <form #prendaForm= "ngForm">
-          <div class="form-group row">
-            <label for="talla" class="col-form-label col-sm-2">Talla</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" [(ngModel)]="prenda.talla" name="talla">
-            </div>
-          </div>
-    
-          <div class="form-group row">
-            <label for="color" class="col-form-label col-sm-2">Color</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" [(ngModel)]="prenda.color" name="color">
-            </div>
-          </div>
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
 
-          <div class="form-group row">
-            <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" [(ngModel)]="prenda.descripcion" name="descripcion">
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="precio" class="col-form-label col-sm-2">Precio</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" [(ngModel)]="prenda.precio" name="precio">
-            </div>
-          </div>
-    
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!prenda.id else elseBlock" [disabled]="!prendaForm.form.valid">Crear</button>
-    
-              <ng-template #elseBlock>
-                <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!prendaForm.form.valid">Editar</button>
-              </ng-template>
-            </div>
-          </div>
-        </form>
-    
+    <form #prendaForm="ngForm">
+      <div class="form-group row" *ngIf="!prenda.id">
+        <label for="tipo" class="col-form-label col-sm-2">Tipo</label>
+        <div class="col-sm-6">
+          <select class="form-control" [(ngModel)]="prenda.tipo" name="tipo">
+            <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
+          </select>
+        </div>
       </div>
-    </div>
-    
+
+      <div class="form-group row">
+        <label for="talla" class="col-form-label col-sm-2">Talla</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="prenda.talla" name="talla">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="color" class="col-form-label col-sm-2">Color</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="prenda.color" name="color">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="prenda.descripcion" name="descripcion">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="precio" class="col-form-label col-sm-2">Precio</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="prenda.precio" name="precio">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!prenda.id else elseBlock"
+            [disabled]="!prendaForm.form.valid">Crear</button>
+
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role="button" (click)='update()'
+              [disabled]="!prendaForm.form.valid">Editar</button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

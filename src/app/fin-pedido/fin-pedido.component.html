@@ -1,0 +1,43 @@
+<div class="container">
+    <h2>Formulario de Pedido</h2>
+    <form (ngSubmit)="finalizarPedido()" #pedidoForm="ngForm">
+      <div class="form-group">
+        <label for="direccion">Dirección de Envío:</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="pedido.direccion" required>
+        <div *ngIf="pedidoForm.controls['direccion'].invalid && (pedidoForm.controls['direccion'].dirty || pedidoForm.controls['direccion'].touched)"
+             class="alert alert-danger">
+          <div *ngIf="pedidoForm.controls['direccion'].errors.required">
+            La dirección es requerida.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción del Pedido:</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" [(ngModel)]="pedido.descripcion" rows="3" required></textarea>
+        <div *ngIf="pedidoForm.controls['descripcion'].invalid && (pedidoForm.controls['descripcion'].dirty || pedidoForm.controls['descripcion'].touched)"
+             class="alert alert-danger">
+          <div *ngIf="pedidoForm.controls['descripcion'].errors.required">
+            La descripción es requerida.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="metodoPago">Método de Pago:</label>
+        <select class="form-control" id="metodoPago" name="metodoPago" [(ngModel)]="pedido.metodoPago" required>
+          <option value="">Seleccionar Método de Pago</option>
+          <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
+          <option value="Transferencia">Transferencia Bancaria</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Efectivo">Efectivo</option>
+        </select>
+        <div *ngIf="pedidoForm.controls['metodoPago'].invalid && (pedidoForm.controls['metodoPago'].dirty || pedidoForm.controls['metodoPago'].touched)"
+             class="alert alert-danger">
+          <div *ngIf="pedidoForm.controls['metodoPago'].errors.required">
+            El método de pago es requerido.
+          </div>
+        </div>
+      </div>
+      <button style="margin-top: 15px" class="btn btn-primary btn-submit">Enviar Pedido</button>
+    </form>
+  </div>
+  

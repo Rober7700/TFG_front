@@ -32,7 +32,7 @@ export class CrearClienteComponent implements OnInit {
       }
     })
   }
-
+/*
   create(): void {
     this.clienteService.create(this.cliente)
       .subscribe({
@@ -61,5 +61,5 @@ export class CrearClienteComponent implements OnInit {
         }
       });
   }
-
+  */
 }
