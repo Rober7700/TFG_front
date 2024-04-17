@@ -52,6 +52,17 @@ export class PrendaService {
     );
   }
 
+  getAllPrendas(): Observable<any> {
+    return this.http.get(this.urlEndPoint, {headers: this.agregarAuth()})
+    .pipe(
+      map((response) => response as Prenda[]),
+      catchError(e => {
+        this.isNoAutorizado(e)
+        return throwError(() => (e));
+      })
+    );
+  }
+
   create(prenda: Prenda): Observable<any> {
     return this.http.post(this.urlEndPoint, prenda, { headers: this.agregarAuth() }).pipe(
       map((response: any) => response.data as Prenda),

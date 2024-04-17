@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { PrendaService } from '../core/services/prenda.service';
 import { Prenda } from '../core/classes/prenda';
-import { ModalService } from '../core/services/modal.service';
 import { CarritoService } from '../core/services/carrito.service';
 import { ArchivadorService } from '../core/services/archivador.service';
+import { TokenService } from '../core/services/token.service';
+
+const TIPO_PRENDA = 'ZAPATO';
 
 @Component({
   selector: 'app-zapatos',
@@ -11,15 +13,15 @@ import { ArchivadorService } from '../core/services/archivador.service';
   styleUrl: './zapatos.component.css'
 })
 export class ZapatosComponent {
-
-  tipo: string = "ZAPATO"
+  
   prendas: Prenda[];
+  isLogged: boolean;
 
-  constructor(private prendaService: PrendaService,
-    private modalService: ModalService, private carritoService: CarritoService, private archivadorService: ArchivadorService) { }
+  constructor(private prendaService: PrendaService, private tokenService: TokenService, private carritoService: CarritoService, private archivadorService: ArchivadorService) { }
 
   ngOnInit() {
-    this.prendaService.getPrendasPorTipo(this.tipo).subscribe(response => {
+    this.isLogged = this.tokenService.isLogged();
+    this.prendaService.getPrendasPorTipo(TIPO_PRENDA).subscribe(response => {
       this.prendas = response.data as Prenda[];
       console.log(response.data);
     });

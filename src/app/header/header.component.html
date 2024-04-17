@@ -53,12 +53,16 @@
         </li>
       </ul>
       <!-- Archivador -->
-      <button class="btn btn-outline-info" type="button" [routerLink]="['/archivador']" *ngIf="isLogged && !isAdmin">Archivador</button>
+      <button class="btn btn-outline-info" type="button" [routerLink]="['/archivador']"
+        *ngIf="isLogged"><i class="bi bi-bookmark-heart-fill text h4"></i></button>
       <!-- MisPedidos -->
-      <button class="btn btn-outline-warning" type="button" [routerLink]="['/misPedidos']" *ngIf="isLogged && !isAdmin">Mis Pedidos</button>
-      <button class="btn btn-outline-warning" type="button" [routerLink]="['/misPedidos']" *ngIf="isAdmin">Pedidos</button>
+      <button class="btn btn-outline-warning" type="button" [routerLink]="['/misPedidos']"
+        *ngIf="isLogged && !isAdmin">Mis Pedidos</button>
+      <button class="btn btn-outline-warning" type="button" [routerLink]="['/misPedidos']"
+        *ngIf="isAdmin">Pedidos</button>
       <!-- Carrito -->
-      <button class="btn btn-outline-success" type="button" [routerLink]="['/carrito']" *ngIf="isLogged">Carrito</button>
+      <button class="btn btn-outline-success" type="button" [routerLink]="['/carrito']"
+        *ngIf="isLogged">Carrito<i class="bi bi-cart4"></i></button>
       <!-- Loggearse -->
       <form class="d-flex" role="search">
         <button class="btn btn-outline-success" type="button" (click)="onLogin()" *ngIf="!isLogged">Login</button>

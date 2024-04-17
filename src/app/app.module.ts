@@ -28,6 +28,8 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { FinPedidoComponent } from './fin-pedido/fin-pedido.component';
 import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
 import { ArchivadorComponent } from './archivador/archivador.component';
+import { authGuard } from './guards/auth.guard';
+import { DataTablesModule} from 'angular-datatables';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -37,27 +39,27 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'user', component: UserComponent },
   { path: 'logout', component: LogoutComponent },
-  
+
   { path: 'ropa', component: RopaComponent },
   { path: 'zapatos', component: ZapatosComponent },
   { path: 'joyas', component: JoyasComponent },
   { path: 'cinturones', component: CinturonesComponent },
   { path: 'bolsos', component: BolsosComponent },
 
-  { path: 'clientes', component: ClientesComponent },
-  { path: 'clientes/page/:page', component: ClientesComponent },
-  { path: 'clientes/crearCliente', component: CrearClienteComponent },
-  { path: 'clientes/crearCliente/:id', component: CrearClienteComponent },
-  
-  { path: 'prendas', component: PrendasComponent },
-  { path: 'prendas/page/:page', component: PrendasComponent },
-  { path: 'prendas/crearPrenda', component: CrearPrendaComponent},
-  { path: 'prendas/crearPrenda/:id', component: CrearPrendaComponent },
-  
-  { path: 'archivador', component: ArchivadorComponent },
-  { path: 'carrito', component: CarritoComponent },
-  { path: 'finPedido', component: FinPedidoComponent },
-  { path: 'misPedidos', component: MisPedidosComponent }];
+  { path: 'clientes', component: ClientesComponent, canActivate: [authGuard] },
+  { path: 'clientes/page/:page', component: ClientesComponent, canActivate: [authGuard] },
+  { path: 'clientes/crearCliente', component: CrearClienteComponent, canActivate: [authGuard] },
+  { path: 'clientes/crearCliente/:id', component: CrearClienteComponent, canActivate: [authGuard] },
+
+  { path: 'prendas', component: PrendasComponent, canActivate: [authGuard] },
+  { path: 'prendas/page/:page', component: PrendasComponent, canActivate: [authGuard] },
+  { path: 'prendas/crearPrenda', component: CrearPrendaComponent, canActivate: [authGuard] },
+  { path: 'prendas/crearPrenda/:id', component: CrearPrendaComponent, canActivate: [authGuard] },
+
+  { path: 'archivador', component: ArchivadorComponent, canActivate: [authGuard] },
+  { path: 'carrito', component: CarritoComponent, canActivate: [authGuard] },
+  { path: 'finPedido', component: FinPedidoComponent, canActivate: [authGuard] },
+  { path: 'misPedidos', component: MisPedidosComponent, canActivate: [authGuard] }];
 
 @NgModule({
   declarations: [
@@ -89,7 +91,8 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    AppRoutingModule
+    AppRoutingModule,
+    DataTablesModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ResourceInterceptor, multi: true }

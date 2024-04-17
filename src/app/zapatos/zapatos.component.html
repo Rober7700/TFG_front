@@ -1,7 +1,7 @@
 <div class="card border-primary mb-3">
   <div class="card-header">Zapatos</div>
   <div class="card-body text-primary">
-    <h5 class="card-title">Listado de zapatos</h5>
+    <h5 class="card-title">Listado de Zapatos</h5>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -11,8 +11,8 @@
           <th>Color</th>
           <th>Descripcion</th>
           <th>Precio</th>
-          <th>Archivador</th>
-          <th>Carrito</th>
+          <th *ngIf="isLogged">Archivador</th>
+          <th *ngIf="isLogged">Carrito</th>
         </tr>
       </thead>
       <tbody>
@@ -29,10 +29,10 @@
           <td>{{ prenda.color }}</td>
           <td>{{ prenda.descripcion }}</td>
           <td>{{ prenda.precio }}</td>
-          <td>
+          <td *ngIf="isLogged">
             <button type="button" name="agregar" (click)="addArchivador(prenda.id)" class="btn btn-primary btn-sm">Archivador</button>
           </td>
-          <td>
+          <td *ngIf="isLogged">
             <button type="button" name="agregar" (click)="addCarrito(prenda.id)" class="btn btn-primary btn-sm">Carrito</button>
           </td>
         </tr>

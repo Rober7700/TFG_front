@@ -1,4 +1,4 @@
-<app-detalle *ngIf="prendaSeleccionada" [prenda] = "prendaSeleccionada" ></app-detalle>
+<app-detalle *ngIf="prendaSeleccionada" [prenda]="prendaSeleccionada"></app-detalle>
 <div class="card border-primary mb-3">
   <div class="card-header">Prendas</div>
   <div class="card-body text-primary">
@@ -8,7 +8,7 @@
         Registrar Prenda
       </button>
     </div>
-    <table class="table table-bordered table-striped">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th style="width: 50px;">Imagen</th>
@@ -19,20 +19,18 @@
           <th>Descripcion</th>
           <th>Precio</th>
           <th>Fecha</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let prenda of prendas; let i = index" [class.table-primary]="i % 2 !== 0">
           <td>
-            <img (click)="abrirModal(prenda)" *ngIf="prenda?.foto" 
-            src="http://localhost:8080/almacen/prendas/img/{{prenda.foto}}" alt="{{prenda.foto}}" class="img-thumbnail rounded"
-            style="width: 64px; cursor:pointer;">
-            
-            <img (click)="abrirModal(prenda)" *ngIf="!prenda?.foto" 
-            src="http://localhost:8080/img/IconoMas.png" alt="{{prenda.foto}}" class="img-thumbnail rounded"
-            style="width: 64px; cursor:pointer;">
+            <img (click)="abrirModal(prenda)" *ngIf="prenda?.foto"
+              src="http://localhost:8080/almacen/prendas/img/{{prenda.foto}}" alt="{{prenda.foto}}"
+              class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">
+
+            <img (click)="abrirModal(prenda)" *ngIf="!prenda?.foto" src="http://localhost:8080/img/IconoMas.png"
+              alt="{{prenda.foto}}" class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">
           </td>
           <td>{{ prenda.id }}</td>
           <td>{{ prenda.tipo}}</td>
@@ -41,13 +39,9 @@
           <td>{{ prenda.descripcion }}</td>
           <td>{{ prenda.precio }}</td>
           <td>{{ prenda.createAt }}</td>
-          <td>
-            <button type="button" name="editar" [routerLink]="['/prendas/crearPrenda', prenda.id]"
-              class="btn btn-primary btn-sm">Editar</button>
-          </td>
-          <td>
-            <button type="button" name="eliminar" (click)='delete(prenda)'
-              class="btn btn-danger btn-sm">Eliminar</button>
+          <td style="width: 13%">
+            <a class="btn btn-primary" [routerLink]="['/prendas/crearPrenda', prenda.id]">Editar</a> |
+            <a class="btn btn-danger" (click)='delete(prenda)'>Eliminar</a>
           </td>
         </tr>
       </tbody>

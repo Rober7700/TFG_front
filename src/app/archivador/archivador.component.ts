@@ -39,7 +39,7 @@ export class ArchivadorComponent {
       this.getCarrito();
     })
   }
-
+  
   addCarrito(prendaId:number) {
     this.carritoService.addPrendaAlCarrito(prendaId).subscribe((res) => {
       console.log(res);
