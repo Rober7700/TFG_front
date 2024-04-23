@@ -49,6 +49,7 @@ export class TokenService {
     const payloadDecoded = atob(payload);
     const values = JSON.parse(payloadDecoded);
     const roles = values.roles;
+    console.log(roles)
     if (roles.indexOf('ROLE_ADMIN') < 0) {
       return false;
     }

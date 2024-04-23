@@ -1,0 +1,11 @@
+<div class="contenedor">
+    <p class="titulo">{{titulo}}</p>
+
+    <div class="flex felx-wrap justify-center">
+
+        <ngcontainer *ngFor="let prenda of prendas">
+            <app-producto-home [prenda]="prenda"/>
+        </ngcontainer>
+
+    </div>
+</div>

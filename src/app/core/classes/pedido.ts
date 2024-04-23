@@ -1,5 +1,6 @@
 export class Pedido {
-    total: number;
+    precioOriginal: number;
+    precioConDescuento: number;
     descripcionFactura: string;
     metodoPago: string;
     direccion: string;    

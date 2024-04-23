@@ -1,7 +1,9 @@
 export class Carrito {
     id:number;
     prendaId: number;
+    nombre: string;
     descripcion: string;
     imagenes: string[];
-    precio: number;
+    precioOriginal: number;
+    precioConDescuento: number;
 }

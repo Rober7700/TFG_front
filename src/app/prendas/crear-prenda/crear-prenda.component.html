@@ -1,62 +1,108 @@
-<ul class="alert alert-danger" *ngIf="errores?.length > 0">
-  <li *ngFor="let err of errores">
-    {{ err }}
-  </li>
-</ul>
-<div class="card bg-dark text-white">
-  <div class="card-header">{{ titulo }}</div>
-  <div class="card-body">
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="card shadow p-6 mb-5 bg-white rounded" style="width: 1000px;">
+    <div class="card-body">
 
-    <form #prendaForm="ngForm">
-      <div class="form-group row" *ngIf="!prenda.id">
-        <label for="tipo" class="col-form-label col-sm-2">Tipo</label>
-        <div class="col-sm-6">
-          <select class="form-control" [(ngModel)]="prenda.tipo" name="tipo">
-            <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
-          </select>
+      <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+        <li *ngFor="let err of errores">
+          {{ err }}
+        </li>
+      </ul>
+
+      <div class="card bg-dark text-white">
+        <div class="card-header">{{ titulo }}</div>
+        <div class="card-body">
+
+          <form #prendaForm="ngForm">
+            <div class="form-group row" *ngIf="!prenda.id">
+
+              <!--TIPO DE PRENDA-->
+              <label for="tipo" class="col-form-label col-sm-3">Tipo</label>
+              <div class="col-sm-3">
+                <select class="form-control" [(ngModel)]="prenda.tipo" name="tipo"
+                  (change)="seleccionTipoPrenda($event.target.value)">
+                  <option *ngFor="let tipo of tiposPrenda" [value]="tipo">{{ tipo }}</option>
+                </select>
+              </div>
+
+              <!--TALLA DE PRENDA-->
+              <label for="talla" class="col-form-label col-sm-3">Talla</label>
+              <div class="col-sm-3">
+                <ng-container *ngIf="tipoSeleccionado === 'ZAPATO'; else selectTalla">
+                  <input type="text" class="form-control" [(ngModel)]="prenda.talla" name="talla">
+                </ng-container>
+                <ng-template #selectTalla>
+                  <select class="form-control" [(ngModel)]="prenda.talla" name="talla" *ngIf="tipoSeleccionado !== ''"
+                    [disabled]="isTipoInhabilitado()">
+                    <option *ngFor="let talla of tallasPrenda" [value]="talla">{{ talla }}</option>
+                  </select>
+                </ng-template>
+              </div>
+            </div>
+
+            <!--NOMBRE DE PRENDA-->
+            <div class="form-group row">
+              <label for="nombre" class="col-form-label col-sm-3">Nombre</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" [(ngModel)]="prenda.nombre" name="nombre">
+              </div>
+              <!--DESCRIPCION DE PRENDA-->
+              <label for="descripcion" class="col-form-label col-sm-3">Descripción</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" [(ngModel)]="prenda.descripcion" name="descripcion">
+              </div>
+            </div>
+
+            <!--PRECIOS DE PRENDA-->
+            <div class="form-group row">
+              <label for="precioOriginal" class="col-form-label col-sm-3">Precio Original</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" [(ngModel)]="prenda.precioOriginal" name="precioOriginal">
+              </div>
+              <label for="precioConDescuento" class="col-form-label col-sm-3">Precio con Descuento</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" [(ngModel)]="prenda.precioConDescuento"
+                  name="precioConDescuento">
+              </div>
+            </div>
+
+            <!--COLOR DE PRENDA-->
+            <div class="form-group row">
+              <label for="color" class="col-form-label col-sm-3">Color</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" [(ngModel)]="prenda.color" name="color">
+              </div>
+              <label for="escaparate" class="col-form-label col-sm-3">Escaparate</label>
+              <div class="col-sm-3" style="justify-content: center;margin-top: 5px;">
+                <label class="radio-inline">
+                  <input type="radio" [(ngModel)]="prenda.escaparate" name="escaparate" [value]="true"> Sí
+                </label>
+                <label class="radio-inline" style="margin-left: 10px;">
+                  <input type="radio" [(ngModel)]="prenda.escaparate" name="escaparate" [value]="false"> No
+                </label>
+              </div>
+            </div>
+
+            <!-- RADIO BUTTON PARA ESCAPARATE -->
+
+
+            <div class="form-group row justify-content-center mt-3">
+              <div class="col-sm-12 text-center">
+                <button class="btn btn-primary btn-lg" role="button" (click)='create()'
+                  *ngIf="!prenda.id else elseBlock" [disabled]="!prendaForm.form.valid"
+                  style="width: 100%; max-width: 300px;">Crear</button>
+
+                <ng-template #elseBlock>
+                  <button class="btn btn-primary btn-lg" role="button" (click)='update()'
+                    [disabled]="!prendaForm.form.valid" style="width: 100%; max-width: 300px;">Editar</button>
+                </ng-template>
+              </div>
+            </div>
+
+          </form>
+
         </div>
       </div>
 
-      <div class="form-group row">
-        <label for="talla" class="col-form-label col-sm-2">Talla</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="prenda.talla" name="talla">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="color" class="col-form-label col-sm-2">Color</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="prenda.color" name="color">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="prenda.descripcion" name="descripcion">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="precio" class="col-form-label col-sm-2">Precio</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="prenda.precio" name="precio">
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!prenda.id else elseBlock"
-            [disabled]="!prendaForm.form.valid">Crear</button>
-
-          <ng-template #elseBlock>
-            <button class="btn btn-primary" role="button" (click)='update()'
-              [disabled]="!prendaForm.form.valid">Editar</button>
-          </ng-template>
-        </div>
-      </div>
-    </form>
-
+    </div>
   </div>
 </div>

@@ -3,13 +3,16 @@ export class Prenda {
     tipo: TipoPrenda;
     talla: string;
     color: string;
+    nombre: string;
     descripcion: string;
-    precio: number;
+    precioOriginal: number;
+    precioConDescuento: number;
     fotos: string[];
     vendido: boolean;
+    escaparate: boolean;
     createAt: string;
 }
 
 export enum TipoPrenda {
-    ROPA, ZAPATO, JOYA, BOLSO, CINTURON
+    BOLSO, CHAQUETA, CINTURON, FALDA, JERSEY, JOYA, PANTALONES, TOP, VESTIDO, ZAPATO
   }

@@ -1,4 +1,4 @@
-<app-detalle *ngIf="prendaSeleccionada" [prenda]="prendaSeleccionada"></app-detalle>
+<app-detalle-admin *ngIf="prendaSeleccionada" [prenda]="prendaSeleccionada"></app-detalle-admin>
 <div class="card border-primary mb-3">
   <div class="card-header">Prendas</div>
   <div class="card-body text-primary">
@@ -9,33 +9,37 @@
       </button>
     </div>
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped">
-      <thead>
+      <thead> 
         <tr>
           <th style="width: 50px;">Imagen</th>
-          <th>id</th>
           <th>Tipo</th>
           <th>Talla</th>
           <th>Color</th>
+          <th>Nombre</th>
           <th>Descripcion</th>
-          <th>Precio</th>
+          <th>PrecioOriginal</th>
+          <th>PrecioConDescuento</th>
           <th>Vendido</th>
+          <th>Escaparate</th>
           <th>Fecha</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prenda of prendas; let i = index" [class.table-primary]="i % 2 !== 0">
+        <tr *ngFor="let prenda of prendas; let i = index" [class.table-primary]="i % 2 !== 0" [class.table-danger]="prenda.vendido">
           <td>
               <img (click)="abrirModal(prenda)" [src]="primeraFoto(prenda)" alt="{{ prenda.fotos }}"
                 class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">          
           </td>
-          <td>{{ prenda.id }}</td>
           <td>{{ prenda.tipo}}</td>
           <td>{{ prenda.talla }}</td>
           <td>{{ prenda.color }}</td>
+          <td>{{ prenda.nombre }}</td>
           <td>{{ prenda.descripcion }}</td>
-          <td>{{ prenda.precio }}</td>
-          <td>{{ prenda.vendido }}</td>
+          <td>{{ prenda.precioOriginal }}</td>
+          <td>{{ prenda.precioConDescuento }}</td>
+          <td>{{ prenda.vendido?'Si':'No'}}</td>
+          <td>{{ prenda.escaparate?'Si':'No' }}</td>
           <td>{{ prenda.createAt }}</td>
           <td style="width: 13%">
             <a class="btn btn-primary" [routerLink]="['/prendas/crearPrenda', prenda.id]">Editar</a> |
@@ -44,6 +48,5 @@
         </tr>
       </tbody>
     </table>
-    <paginator-nav *ngIf="paginator" [paginator]="paginator" tipo="prendas"></paginator-nav>
   </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="custom-box d-flex flex-column position-relative">
+    <div class="d-flex flex-grow-1">
+        <div class="flex-container" style="flex: 1 0 66%;">
+            <div class="div-img col-12 col-lg-3">
+                <img class="custom-image" [src]="primeraFoto(carrito)" alt="{{ carrito.imagenes }}"> 
+            </div>
+            <div class="info-container">
+                <p>Prenda chulisma</p>
+                <div>
+                    <span class="original-price">Precio: {{ carrito.precioConDescuento }} €</span>
+                    <span class="precio-tachado" *ngIf="carrito.precioOriginal!=carrito.precioConDescuento">{{ carrito.precioOriginal }} €</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="position-absolute top-0 end-0 mt-2 me-2">
+        <button type="button" class="btn-close btn-close-black" aria-label="Close" (click)="delete(carrito.prendaId)"></button>
+    </div>
+</div>

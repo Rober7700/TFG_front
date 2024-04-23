@@ -1,0 +1,30 @@
+.contenedor {
+    padding: 1.25rem; /* Equivalente a p-5 en Tailwind CSS */
+}
+
+@media (min-width: 1024px) {
+    .contenedor {
+        padding-left: 2.5rem; /* Equivalente a lg:px-20 en Tailwind CSS */
+        padding-right: 2.5rem; /* Equivalente a lg:px-20 en Tailwind CSS */
+        padding-top: 3rem; /* Equivalente a lg:py-10 en Tailwind CSS */
+        padding-bottom: 3rem; /* Equivalente a lg:py-10 en Tailwind CSS */
+    }
+}
+
+.titulo {
+    font-weight: 600; /* Equivalente a font-semibold en Tailwind CSS */
+    font-size: 1.5rem; /* Equivalente a text-2xl en Tailwind CSS */
+    opacity: 0.75; /* Equivalente a opacity-75 en Tailwind CSS */
+}
+
+.flex {
+    display: flex; /* Establece el contenedor como flexible */
+}
+
+.flex-wrap {
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben en una línea */
+}
+
+.justify-center {
+    justify-content: center; /* Centra los elementos flexibles horizontalmente */
+}

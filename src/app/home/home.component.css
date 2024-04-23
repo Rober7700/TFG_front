@@ -1,6 +1,5 @@
 
 .scrolling-text-container {
-    position: absolute;
     top: 60px; /* Ajusta esta altura según la altura de tu navbar */
     left: 0;
     width: 100%;

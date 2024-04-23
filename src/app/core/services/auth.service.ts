@@ -12,7 +12,7 @@ export class AuthService {
 
     constructor(private httpClient: HttpClient) { }
 
-    public getToken(code: string, code_verifier:string): Observable<any> {
+    public getToken(code: string, code_verifier: string): Observable<any> {
         let body = new URLSearchParams();
         body.set('grant_type', environment.grant_type);
         body.set('client_id', environment.client_id);

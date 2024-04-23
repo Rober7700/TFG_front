@@ -1,0 +1,44 @@
+.custom-box {
+    padding: 1.25rem;
+    /* Equivalente a p-5 de Tailwind (1.25rem = 20px) */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* Equivalente a shadow-lg de Tailwind */
+}
+
+/* Estilo para el contenedor flex */
+.flex-container {
+    display: flex;
+    /* Convertir el contenedor en un contenedor flex */
+    align-items: center;
+    width: 60%;
+    /* Alinear elementos verticalmente al centro */
+}
+
+.div-img {
+    width: 5rem;
+    /* Equivalente a w-[5rem] de Tailwind CSS */
+    height: 100%;
+    /* Equivalente a h-[5rem] de Tailwind CSS */
+}
+
+/* Estilos para la imagen */
+.custom-image {
+    width: 100%;
+    /* Equivalente a w-full de Tailwind CSS */
+    height: 100%;
+    /* Equivalente a h-full de Tailwind CSS */
+    object-fit: cover;
+    /* Equivalente a object-cover de Tailwind CSS */
+    object-position: top;
+    /* Equivalente a object-top de Tailwind CSS */
+}
+
+.info-container {
+    margin-left: 1.25rem;
+}
+
+.precio-tachado {
+    margin-left: 10px;
+    text-decoration: line-through;
+    color: red;
+  }

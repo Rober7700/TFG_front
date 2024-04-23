@@ -108,6 +108,33 @@ export class PrendaService {
     );
   }
 
+  getPrendasPorTalla(talla: string): Observable<any> {
+    return this.http.get<any>(this.urlEndPoint + '/ropa/' + talla).pipe(
+      catchError(e => {
+        this.isNoAutorizado(e)
+        return throwError(() => (e));
+      })
+    );
+  }
+
+  getPrendasPorEscaparate(): Observable<any> {
+    return this.http.get<any>(this.urlEndPoint + '/escaparate').pipe(
+      catchError(e => {
+        this.isNoAutorizado(e)
+        return throwError(() => (e));
+      })
+    );
+  }
+
+  getPrendasPorVendido(): Observable<any> {
+    return this.http.get<any>(this.urlEndPoint + '/vendido').pipe(
+      catchError(e => {
+        this.isNoAutorizado(e)
+        return throwError(() => (e));
+      })
+    );
+  }
+
   update(prenda: Prenda): Observable<Prenda> {
     return this.http.put<Prenda>(`${this.urlEndPoint}/${prenda.id}`, prenda, { headers: this.agregarAuth() }).pipe(
       map((response: any) => response.data as Prenda),

@@ -1,0 +1,351 @@
+/*foto*/
+.gallery-container {
+    max-width: 100%;
+    /* Cambiado a 100% para adaptarse al contenedor */
+    margin: 0 auto;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-image {
+    width: 85%;
+    /* Ajusta el ancho de la imagen principal según sea necesario */
+    min-height: 750px;
+    /* Ajusta el alto según sea necesario */
+}
+
+.main-image img {
+    width: 95%;
+    margin-left: 35px;
+    height: auto;
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    /* Espacio entre la imagen principal y las miniaturas */
+}
+
+.thumbnail {
+    margin-bottom: 5px;
+    /* Espacio entre miniaturas */
+    cursor: pointer;
+}
+
+.thumbnail img {
+    width: 100px;
+    /* Ajusta el ancho de las miniaturas según sea necesario */
+    height: auto;
+}
+
+/*Corazon*/
+$bubble-d: 4.5rem; // bubble diameter
+$bubble-r: .5*$bubble-d; // bubble-radius
+$sparkle-d: .375rem;
+$sparkle-r: .5*$sparkle-d;
+
+@mixin sparkles($k) {
+    $shadow-list: (
+    );
+$n-groups: 7;
+$group-base-angle: calc(360deg/$n-groups);
+$group-distr-r: (
+    1 + $k*.25)*$bubble-r;
+$n-sparkles: 2;
+$sparkle-base-angle: calc(360deg/$n-sparkles
+);
+$sparkle-off-angle: 60deg; // offset angle from radius
+$spread-r: -$k*$sparkle-r;
+
+@for $i from 0 to $n-groups {
+    $group-curr-angle: $i*$group-base-angle - 90deg;
+    $xg: $group-distr-r*cos($group-curr-angle);
+    $yg: $group-distr-r*sin($group-curr-angle);
+
+    @for $j from 0 to $n-sparkles {
+        $sparkle-curr-angle: $group-curr-angle + $sparkle-off-angle + $j*$sparkle-base-angle;
+        $xs: $xg + $sparkle-d*cos($sparkle-curr-angle);
+        $ys: $yg + $sparkle-d*sin($sparkle-curr-angle);
+
+        $shadow-list: $shadow-list, $xs $ys 0 $spread-r hsl(($i + $j)*$group-base-angle, 100%, 75%);
+    }
+}
+
+box-shadow: $shadow-list;
+}
+
+@mixin bubble($ext) {
+    transform: scale(1);
+    border-color: #cc8ef5;
+    border-width: $ext;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg,
+            #121721, #000);
+    font: 1em verdana, sans-serif;
+}
+
+[id='toggle-heart'] {
+    position: absolute;
+    left: -100vw;
+
+    &:checked+label {
+        color: #e2264d;
+        filter: none;
+        will-change: font-size;
+        animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+
+        &:before,
+        &:after {
+            animation: inherit;
+            animation-timing-function: ease-out;
+        }
+
+        &:before {
+            will-change: transform, border-width, border-color;
+            animation-name: bubble;
+        }
+
+        &:after {
+            will-change: opacity, box-shadow;
+            animation-name: sparkles;
+        }
+    }
+
+    &:focus+label {
+        text-shadow: 0 0 3px white,
+            0 1px 1px white, 0 -1px 1px white,
+            1px 0 1px white, -1px 0 1px white;
+    }
+}
+
+[for='toggle-heart'] {
+    align-self: center;
+    position: relative;
+    color: #888;
+    font-size: 2em;
+    filter: grayscale(1);
+    user-select: none;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        content: '';
+    }
+
+    &:before {
+        box-sizing: border-box;
+        margin: -$bubble-r;
+        border: solid $bubble-r #e2264d;
+        width: $bubble-d;
+        height: $bubble-d;
+        transform: scale(0);
+    }
+
+    &:after {
+        margin: -$sparkle-r;
+        width: $sparkle-d;
+        height: $sparkle-d;
+        @include sparkles(1);
+    }
+}
+
+@keyframes bubble {
+    15% {
+        @include bubble($bubble-r);
+    }
+
+    30%,
+    100% {
+        @include bubble(0);
+    }
+}
+
+@keyframes sparkles {
+
+    0%,
+    20% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+        @include sparkles(0);
+    }
+}
+
+//boton
+
+.btn-state {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease-in .2s;
+    gap: .5rem;
+    opacity: 0;
+}
+
+.state-default {
+    opacity: 1;
+}
+
+.state-adding, .state-failed, .state-added {
+    transform: translateY(100%);
+}
+
+
+.cart-adding .state-default, .cart-failed .state-default, .cart-added .state-default {
+    transform: translateY(-100%);
+}
+
+.cart-added .state-adding, .cart-failed .state-adding {
+    transform: translateY(-100%);
+}
+
+.cart-adding .state-default, .cart-failed .state-default, .cart-added .state-default {
+    opacity: 0;
+}
+
+.cart-adding .state-adding, .cart-added .state-added, .cart-failed .state-failed {
+    opacity: 1;
+    transform: none;
+}
+
+/* Bouncing ellipsis animation */
+.animation-ellipsis {
+    display: flex;
+    gap: 3px;
+}
+
+.dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .5);
+    animation: bouncing ease-out 1s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes bouncing {
+    0% {
+        transform: none;
+    }
+
+    33% {
+        transform: translateY(-10px);
+    }
+
+    66% {
+        transform: none;
+    }
+}
+
+/* Checkmark animation */
+.checkmark-wrapper {
+    --check-size: 30px;
+    --check-border-width: 3px;
+    --checkmark-width: calc(var(--check-size) / 2);
+    --checkmark-height: calc(var(--checkmark-width) / 2);
+    --checkmark-left: calc(var(--checkmark-width) / 2);
+    --checkmark-top: 50%;
+    --checkmark-color: rgba(255, 255, 255, .5);
+
+    display: block;
+    width: calc(var(--checkmark-width) + 5px);
+    position: relative;
+}
+
+.checkmark {
+    height: var(--checkmark-height);
+    width: var(--checkmark-width);
+    position: absolute;
+    opacity: 0;
+    left: var(--checkmark-left);
+    top: var(--checkmark-top);
+    display: block;
+    border-left: var(--check-border-width) solid var(--checkmark-color);
+    border-bottom: var(--check-border-width) solid var(--checkmark-color);
+    transform-origin: left top;
+    transform: rotate(-45deg);
+}
+
+.cart-added .checkmark {
+    animation: checkmark linear both .6s;
+}
+
+@keyframes checkmark {
+    0% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    80% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    90% {
+        height: var(--checkmark-height);
+        width: 0;
+        opacity: 1;
+    }
+
+    100% {
+        height: var(--checkmark-height);
+        width: var(--checkmark-width);
+        opacity: 1;
+    }
+}
+.x-mark {
+    height: var(--checkmark-height); /* Tamaño de la "X" */
+    width: var(--checkmark-width); /* Tamaño de la "X" */
+    position: absolute;
+    opacity: 0;
+    left: var(--checkmark-left);
+    top: var(--checkmark-top);
+    display: block;
+    transform-origin: center;
+    font-size: 2em; /* Tamaño de la "X" */
+    color: var(--checkmark-color); /* Color de la "X" */
+}
+
+.cart-failed .x-mark {
+    animation: x-mark-appear linear both .6s; /* Animación de aparición para la "X" */
+}
+
+@keyframes x-mark-appear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

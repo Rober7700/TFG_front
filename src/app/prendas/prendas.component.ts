@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Prenda } from '../core/classes/prenda';
 import { PrendaService } from '../core/services/prenda.service';
-import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ModalService } from '../core/services/modal.service';
 import { Subject } from 'rxjs';
@@ -20,12 +19,11 @@ export class PrendasComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(private prendaService: PrendaService,
-    private activatedRoute: ActivatedRoute,
     private modalService: ModalService) { }
 
   ngOnInit() {
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       searching: true,
       language: {
         "emptyTable": "No hay datos disponibles en la tabla",

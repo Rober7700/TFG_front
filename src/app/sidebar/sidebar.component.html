@@ -1,0 +1,81 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toogleCollapse()">N</button>
+    <div class="logo-text" @fadeInOut *ngIf="collapsed" [routerLink]="['/home']">Numen</div>
+    <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fal fa-times close-icons"></i>
+    </button>
+  </div>
+  <div class="scrollwrap scrollwrap_delayed">
+    <ul class="sidenav-nav">
+      <li class="sidenav-nav-item" *ngFor="let data of navData">
+        <a class="sidenav-nav-link" *ngIf="data.items && data.items.length > 0" (click)="handleClick(data)">
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{data.label}}
+          </span>
+          <i *ngIf="data.items && collapsed" class="menu-collapse-icon"
+            [ngClass]="!data.expanded ? 'bi bi-chevron-compact-left' : 'bi bi-chevron-compact-down'"></i>
+        </a>
+        <a class="sidenav-nav-link" *ngIf="!data.items || (data.items && data.items.length === 0)"
+          [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label}}</span>
+        </a>
+        <div *ngIf="collapsed && data.items && data.items.length > 0">
+          <app-sublevel-menu [data]="data" [collapsed]="collapsed" [multiple]="multiple"
+            [expanded]="data.expanded"></app-sublevel-menu>
+        </div>
+      </li>
+    </ul>
+    <ul class="sidenav-nav bottom">
+      <li class="sidenav-nav-item" *ngIf="isLogged">
+        <a class="sidenav-nav-link" [routerLink]="['/misPedidos']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon">P</i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Mis Pedidos</span>
+        </a>
+      </li>
+      <ng-container *ngIf="isAdmin">
+        <li class="sidenav-nav-item" *ngFor="let data of adminNavbar">
+          <a class="sidenav-nav-link" *ngIf="data.items && data.items.length > 0" (click)="handleClick(data)">
+            <i class="sidenav-link-icon" [class]="data.icon"></i>
+            <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+              {{data.label}}
+            </span>
+            <i *ngIf="data.items && collapsed" class="menu-collapse-icon"
+              [ngClass]="!data.expanded ? 'bi bi-chevron-compact-left' : 'bi bi-chevron-compact-down'"></i>
+          </a>
+          <div *ngIf="collapsed && data.items && data.items.length > 0">
+            <app-sublevel-menu [data]="data" [collapsed]="collapsed" [multiple]="multiple"
+              [expanded]="data.expanded"></app-sublevel-menu>
+          </div>
+        </li>
+      </ng-container>
+      <li class="sidenav-nav-item" *ngIf="isLogged">
+        <a class="sidenav-nav-link" [routerLink]="['/archivador']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon"><i class="bi bi-heart-fill" style="color: black;"></i></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Archivador</span>
+        </a>
+      </li>
+      <li class="sidenav-nav-item" *ngIf="isLogged">
+        <a class="sidenav-nav-link" [routerLink]="['/carrito']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon"><i class="bi bi-bag"></i></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Carrito</span>
+        </a>
+      </li>
+      <li class="sidenav-nav-item">
+        <a class="sidenav-nav-link" (click)="onLogin()" *ngIf="!isLogged">
+          <i class="sidenav-link-icon"><i class="bi bi-power"></i></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Iniciar Sesion</span>
+        </a>
+        <a class="sidenav-nav-link" (click)="onLogout()" *ngIf="isLogged">
+          <i class="sidenav-link-icon"><i class="bi bi-power"></i></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

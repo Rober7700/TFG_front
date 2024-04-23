@@ -1,0 +1,46 @@
+<div class="divPrincipal" *ngIf="!listaVacia">
+  <div class="div2">
+    <section class="section-container">
+      <div class="box1">
+        <ng-container>
+          <div *ngFor="let carrito of carritoPrendas">
+            <app-carrito-producto [carrito]="carrito" (productoEliminado)="productoEliminado($event)"></app-carrito-producto>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+    <section class="section-container2">
+      <ng-container>
+        <div class="box2">
+          <p>DETALLES PRECIO</p>
+          <hr>
+          <div class="div3">
+            <div class="div4">
+              <span>Total Productos</span>
+              <span>{{precioOriginal}} €</span>
+            </div>
+            <div class="div4" *ngIf="this.descuento != 0">
+              <span>Descuento</span>
+              <span style="color: green;">{{descuento}} €</span>
+            </div>
+            <div class="div4" style="font-size: 0.8em;">
+              <span>Gastos de envio</span>
+              <span style="color: gainsboro;">GRATIS</span>
+            </div>
+            <div class="div4" style="font-weight: bold;">
+              <span>Precio Final</span>
+              <span>{{precioConDescuento}} €</span>
+            </div>
+          </div>
+          <button class="boton-checkout" (click)="navigateToCheckout()">Checkout</button>
+        </div>
+      </ng-container>
+    </section>
+  </div>
+</div>
+<div class="d-flex justify-content-center align-items-center" *ngIf="listaVacia" style="min-height: 50vh;">
+  <div>
+    <p>No hay elementos en el carrito.</p>
+    <a href="/home" class="btn btn-primary btn-lg">Ir a Home</a>
+  </div>
+</div>

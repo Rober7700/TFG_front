@@ -1,0 +1,32 @@
+<div class="container-vh">
+  <main class="MainClass">
+    <div class="divSuperior">
+      <h1 class="title">Joyas</h1>
+      <div>
+        <div class="dropdown">
+          <button class="btn dropdown-toggle dark" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Ordenar
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" (click)="cambioOrdenPrecio(false)">Precio: mayor a menor</a></li>
+            <li><a class="dropdown-item" (click)="cambioOrdenPrecio(true)">Precio: menor a mayor</a></li>
+            <li><a class="dropdown-item" (click)="cambioOrdenFecha(false)">Fecha de subida: mayor a mayor</a></li>
+            <li><a class="dropdown-item" (click)="cambioOrdenFecha(true)">Fecha de subida: menor a mayor</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <section class="pt-6">
+      <div class="products">
+        <div class="product-container">
+          <div class="product-grid">
+            <ng-container *ngFor="let prenda of prendasSeleccionadas">
+              <app-producto [prenda]="prenda" />
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,86 @@
+<div class="container-vh">
+    <main class="MainClass">
+        <div class="divSuperior">
+            <h1 class="title">Ropa Talla XS-S</h1>
+            <div>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle dark" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Ordenar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" (click)="cambioOrdenPrecio(false)">Precio: mayor a menor</a></li>
+                        <li><a class="dropdown-item" (click)="cambioOrdenPrecio(true)">Precio: menor a mayor</a></li>
+                        <li><a class="dropdown-item" (click)="cambioOrdenFecha(false)">Fecha de subida: mayor a mayor</a></li>
+                        <li><a class="dropdown-item" (click)="cambioOrdenFecha(true)">Fecha de subida: menor a mayor</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section class="pt-6">
+            <div class="grid-container">
+                <div class="filters">
+                    <div class="flex items-center justify-between">
+                        <p class="text-lf">Tipo de prenda <i class="bi bi-filter"></i></p>
+                    </div>
+                    <form>
+                        <div>
+                            <label>
+                                <input type="radio" name="tipo_prenda" value="CHAQUETA" (click)="handleClick($event,'CHAQUETA')"> 
+                                <span [ngClass]="{'selected': selectedType === 'CHAQUETA'}">
+                                    <ng-container *ngIf="selectedType === 'CHAQUETA'">&#10084;</ng-container> Chaqueta
+                                </span>
+                            </label><br>
+                            <label>
+                                <input type="radio" name="tipo_prenda" value="FALDA" (click)="handleClick($event,'FALDA')"> 
+                                <span [ngClass]="{'selected': selectedType === 'FALDA'}">
+                                    <ng-container *ngIf="selectedType === 'FALDA'">&#10084;</ng-container> Falda
+                                </span>
+                            </label><br>
+                            <label>
+                                <input type="radio" name="tipo_prenda" value="JERSEY" (click)="handleClick($event,'JERSEY')"> 
+                                <span [ngClass]="{'selected': selectedType === 'JERSEY'}">
+                                    <ng-container *ngIf="selectedType === 'JERSEY'">&#10084;</ng-container> Jersey
+                                </span>
+                            </label><br>
+                            <label>
+                                <input type="radio" name="tipo_prenda" value="PANTALONES" (click)="handleClick($event,'PANTALONES')">  
+                                <span [ngClass]="{'selected': selectedType === 'PANTALONES'}">
+                                    <ng-container *ngIf="selectedType === 'PANTALONES'">&#10084;</ng-container> Pantalones
+                                </span>
+                            </label><br>
+                            <label>
+                                <input type="radio" name="tipo_prenda" value="TOP" (click)="handleClick($event,'TOP')"> 
+                                <span [ngClass]="{'selected': selectedType === 'TOP'}">
+                                    <ng-container *ngIf="selectedType === 'TOP'">&#10084;</ng-container> Tops
+                                </span>
+                            </label><br>
+                            <label>
+                                <input type="radio" name="tipo_prenda" value="VESTIDO" (click)="handleClick($event,'VESTIDO')"> 
+                                <span [ngClass]="{'selected': selectedType === 'VESTIDO'}">
+                                    <ng-container *ngIf="selectedType === 'VESTIDO'">&#10084;</ng-container> Vestidos
+                                </span>
+                            </label><br>
+                            
+                            <hr *ngIf="this.tipoPrendaSeleccionado">
+                            <label *ngIf="this.tipoPrendaSeleccionado">
+                                <input type="radio" name="tipo_prenda" value="ALL" (click)="handleClick($event,'ALL')"> 
+                                <span>Mostrar todo</span>
+                            </label><br>
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="products">      
+                    <div class="product-container">
+                        <div class="product-grid">
+                            <ng-container *ngFor="let prenda of prendasSeleccionadas">
+                                <app-producto [prenda] = "prenda"/>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

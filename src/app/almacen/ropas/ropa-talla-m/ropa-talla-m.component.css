@@ -1,0 +1,180 @@
+.container-vh {
+  height: 96vh;
+  overflow-y: auto;
+  /* Agrega desplazamiento vertical si el contenido excede la altura */
+}
+
+.MainClass {
+  padding: 0 1rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  /* Utiliza el modelo de caja flexible */
+  flex-direction: column;
+  /* Apila los elementos uno encima del otro */
+  gap: 20px;
+  /* Espacio entre elementos */
+  position: sticky;
+  /* Hace que el contenido principal sea pegajoso */
+  top: 0;
+  /* Lo fija en la parte superior de la ventana */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Safari y Chrome */
+}
+
+
+.divSuperior {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #0b0b0b;
+  background-color: #fafbfe;
+  /* Color de fondo opcional */
+  padding: 2rem 0 1.5rem;
+  position: sticky;
+  /* Hace que el div superior sea pegajoso */
+  top: 0;
+  /* Lo fija en la parte superior de la ventana */
+  z-index: 1;
+  /* Asegura que esté delante del resto del contenido */
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #0b0b0b;
+  margin: 0;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  color: #0b0b0b;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 100px;
+  z-index: 1;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  color: #000;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: minmax(5px, 1fr) minmax(0, 3fr);
+  /* Ajusta el tamaño de la primera columna según tus necesidades */
+  gap: 1.5rem;
+}
+
+
+.text-lf {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.bi-filter {
+  margin-left: 0.5rem;
+  /* Espacio entre el texto y el icono de filtro */
+}
+
+/* Estilos para los radio buttons */
+label {
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+input[type="radio"] {
+  display: none; /* Esconde el círculo del radio button */
+}
+
+label:hover {
+  font-weight: bold;
+  /* Opacidad al pasar el ratón por encima */
+}
+
+.selected {
+  font-weight: bold;
+  font-size: 1.2rem; /* Puedes ajustar el tamaño según tu preferencia */
+}
+
+.product-container {
+  width: 100%;
+  /* Cambia el valor según tus necesidades */
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow: auto;
+}
+
+
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .grid-container {
+      grid-template-columns: 1fr;
+      /* Cambia a una sola columna */
+  }
+
+  .divSuperior {
+      flex-direction: column;
+      /* Cambia la dirección del flexbox a columna */
+      align-items: flex-start;
+      /* Alinea los elementos al inicio */
+  }
+
+  .dropdown {
+      margin-top: 1rem;
+      /* Añade un poco de espacio entre el título y el menú desplegable */
+  }
+
+  .filters {
+      order: 1;
+      /* Cambia el orden de los filtros para que aparezcan después de los productos */
+      margin-top: 1rem;
+      /* Añade un poco de espacio entre los productos y los filtros */
+  }
+
+  .products {
+      order: 2;
+      /* Cambia el orden de los productos para que aparezcan antes de los filtros */
+  }
+}

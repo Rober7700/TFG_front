@@ -1,0 +1,17 @@
+<div class="box" (click)="verDetalle()">
+  <div class="col-sm">
+      <carousel *ngIf="prenda?.fotos && prenda.fotos.length > 0">
+        <slide *ngFor="let foto of prenda.fotos">
+          <img class="img-fluid" [src]="'http://localhost:8080/almacen/prendas/img/' + foto" [alt]="foto">
+        </slide>
+      </carousel>
+      <div *ngIf="!prenda?.fotos || prenda.fotos.length === 0" class="text-muted">No hay fotos disponibles</div>
+  </div>
+  <div class="p4">
+      <h3>{{prenda.nombre}}</h3>
+      <div class="prices-container">
+        <span class="precio-tachado" *ngIf="prenda.precioOriginal!=prenda.precioConDescuento">{{ prenda.precioOriginal }} €</span>
+        <span class="original-price">{{ prenda.precioConDescuento }} €</span>
+      </div>
+  </div>
+</div>

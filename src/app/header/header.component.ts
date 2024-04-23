@@ -8,11 +8,10 @@ const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
 
 @Component({
   selector: 'app-header',
-  styleUrl: './header.component.css',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   title: string = 'App Angular'
 
   authorize_uri: string = environment.authorize_uri;
@@ -73,6 +72,4 @@ export class HeaderComponent implements OnInit {
     .replace(/\//g, '_');
     return code_challenge;
   }
-
 }
-
