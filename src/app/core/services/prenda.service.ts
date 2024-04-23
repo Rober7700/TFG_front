@@ -17,7 +17,7 @@ export class PrendaService {
 
   constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
-  private agregarAuth(){
+  private agregarAuth() {
     let httpHeaders = new HttpHeaders();
     const token = this.tokenService.getAccessToken();
     if (token != null) {
@@ -28,7 +28,7 @@ export class PrendaService {
 
   private isNoAutorizado(e): boolean {
     if (e.status == 401) {
-      if (this.tokenService.isLogged()){
+      if (this.tokenService.isLogged()) {
         this.tokenService.clear();
       }
       this.router.navigateByUrl('');
@@ -42,25 +42,25 @@ export class PrendaService {
   }
 
   getPrendas(page: number): Observable<any> {
-    return this.http.get(this.urlEndPoint + '/page/' + page, {headers: this.agregarAuth()})
-    .pipe(
-      map((response) => response as Prenda[]),
-      catchError(e => {
-        this.isNoAutorizado(e)
-        return throwError(() => (e));
-      })
-    );
+    return this.http.get(this.urlEndPoint + '/page/' + page, { headers: this.agregarAuth() })
+      .pipe(
+        map((response) => response as Prenda[]),
+        catchError(e => {
+          this.isNoAutorizado(e)
+          return throwError(() => (e));
+        })
+      );
   }
 
   getAllPrendas(): Observable<any> {
-    return this.http.get(this.urlEndPoint, {headers: this.agregarAuth()})
-    .pipe(
-      map((response) => response as Prenda[]),
-      catchError(e => {
-        this.isNoAutorizado(e)
-        return throwError(() => (e));
-      })
-    );
+    return this.http.get(this.urlEndPoint, { headers: this.agregarAuth() })
+      .pipe(
+        map((response) => response as Prenda[]),
+        catchError(e => {
+          this.isNoAutorizado(e)
+          return throwError(() => (e));
+        })
+      );
   }
 
   create(prenda: Prenda): Observable<any> {
@@ -143,9 +143,11 @@ export class PrendaService {
     );
   }
 
-  subirFoto(file: File, id): Observable<HttpEvent<{}>> {
+  subirFoto(archivos: File[], id): Observable<HttpEvent<{}>> {
     let formData = new FormData();
-    formData.append("file", file);
+    for (var i = 0; i < archivos.length; i++) {
+      formData.append("files", archivos[i]);
+    }
     formData.append("id", id);
 
     let httpHeaders = new HttpHeaders();

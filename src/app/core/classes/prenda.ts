@@ -5,7 +5,8 @@ export class Prenda {
     color: string;
     descripcion: string;
     precio: number;
-    foto: string;
+    fotos: string[];
+    vendido: boolean;
     createAt: string;
 }
 

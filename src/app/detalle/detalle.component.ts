@@ -15,8 +15,8 @@ export class DetalleComponent implements OnInit {
 
   @Input() prenda: Prenda;
   titulo: string = "Foto de la prenda"
-  private fotoSeleccionada: File;
   progreso: number = 0;
+  fotosSeleccionadas: File[];
 
   constructor(private prendaService: PrendaService,
     public modalService: ModalService) {
@@ -24,42 +24,36 @@ export class DetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.prenda)
   }
 
   seleccionarFoto(event) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      this.fotoSeleccionada = files[0];
-      console.log(this.fotoSeleccionada);
-      if(this.fotoSeleccionada.type.indexOf('image') < 0){
-        Swal.fire('Error selecciona imagen; ', 'El archivo tiene que ser imagen', 'error');
-        this.fotoSeleccionada = null;
-      }
-    }
+    this.fotosSeleccionadas = event.target.files;
   }
-  
+
+
   subirFoto() {
-    if (!this.fotoSeleccionada){
-      Swal.fire('Error Upload; ', 'Debe seleccionar una foto', 'error')
+    if (!this.fotosSeleccionadas) {
+      Swal.fire('Error Upload: ', 'Debe seleccionar una foto', 'error');
     } else {
-      this.prendaService.subirFoto(this.fotoSeleccionada, this.prenda.id).subscribe(
-        event => {
+      this.prendaService.subirFoto(this.fotosSeleccionadas, this.prenda.id)
+        .subscribe(event => {
           if (event.type === HttpEventType.UploadProgress) {
             this.progreso = Math.round((event.loaded / event.total) * 100);
           } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
             this.prenda = response.data as Prenda;
-
             this.modalService.notificarUpload.emit(this.prenda);
             Swal.fire('La foto se ha subido completamente!', response.mensaje, 'success');
           }
         });
     }
   }
+  
 
   cerrarModal() {
     this.modalService.cerrarModal();
-    this.fotoSeleccionada = null;
+    this.fotosSeleccionadas = null;
     this.progreso = 0;
   }
 }

@@ -18,6 +18,7 @@
           <th>Color</th>
           <th>Descripcion</th>
           <th>Precio</th>
+          <th>Vendido</th>
           <th>Fecha</th>
           <th>Acciones</th>
         </tr>
@@ -25,12 +26,8 @@
       <tbody>
         <tr *ngFor="let prenda of prendas; let i = index" [class.table-primary]="i % 2 !== 0">
           <td>
-            <img (click)="abrirModal(prenda)" *ngIf="prenda?.foto"
-              src="http://localhost:8080/almacen/prendas/img/{{prenda.foto}}" alt="{{prenda.foto}}"
-              class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">
-
-            <img (click)="abrirModal(prenda)" *ngIf="!prenda?.foto" src="http://localhost:8080/img/IconoMas.png"
-              alt="{{prenda.foto}}" class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">
+              <img (click)="abrirModal(prenda)" [src]="primeraFoto(prenda)" alt="{{ prenda.fotos }}"
+                class="img-thumbnail rounded" style="width: 64px; cursor:pointer;">          
           </td>
           <td>{{ prenda.id }}</td>
           <td>{{ prenda.tipo}}</td>
@@ -38,6 +35,7 @@
           <td>{{ prenda.color }}</td>
           <td>{{ prenda.descripcion }}</td>
           <td>{{ prenda.precio }}</td>
+          <td>{{ prenda.vendido }}</td>
           <td>{{ prenda.createAt }}</td>
           <td style="width: 13%">
             <a class="btn btn-primary" [routerLink]="['/prendas/crearPrenda', prenda.id]">Editar</a> |

@@ -56,12 +56,22 @@ export class PrendasComponent implements OnInit {
     this.modalService.notificarUpload.subscribe((prenda) => {
       this.prendas = this.prendas.map(prendaOriginal => {
         if (prenda.id == prendaOriginal.id) {
-          prendaOriginal.foto = prenda.foto;
+          prendaOriginal.fotos = prenda.fotos;
         }
+        console.log("prendaOriginal", prendaOriginal.fotos[0])
+        console.log("prenda", prenda.fotos[0])
         return prendaOriginal;
       })
     });
   }
+
+  primeraFoto(prenda: Prenda): string {
+    if (prenda && prenda.fotos && prenda.fotos.length > 0) {
+      return `http://localhost:8080/almacen/prendas/img/${prenda.fotos[0]}`;
+    } else {
+      return 'http://localhost:8080/img/IconoMas.png';
+    }
+  } 
 
   cargarContenido() {
     this.prendaService.getAllPrendas().subscribe(res => {

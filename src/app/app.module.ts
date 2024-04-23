@@ -30,6 +30,9 @@ import { MisPedidosComponent } from './mis-pedidos/mis-pedidos.component';
 import { ArchivadorComponent } from './archivador/archivador.component';
 import { authGuard } from './guards/auth.guard';
 import { DataTablesModule} from 'angular-datatables';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { EscaparateHomeComponent } from './home/escaparate-home/escaparate-home.component';
+import { ElementoPrendaHomeComponent } from './home/escaparate-home/elemento-prenda-home/elemento-prenda-home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -85,6 +88,8 @@ const routes: Routes = [
     FinPedidoComponent,
     MisPedidosComponent,
     ArchivadorComponent,
+    EscaparateHomeComponent,
+    ElementoPrendaHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +97,8 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    CarouselModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ResourceInterceptor, multi: true }
