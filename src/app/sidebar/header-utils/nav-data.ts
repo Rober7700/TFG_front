@@ -3,7 +3,7 @@ import { INavbarData } from "./helper";
 export const navbarData: INavbarData[] = [
     {
         routeLink: '',
-        icon: 'bi bi-bookmarks',
+        icon: 'bi bi-1-circle',
         label: 'Ropa',
         items: [
             {
@@ -22,12 +22,12 @@ export const navbarData: INavbarData[] = [
     },
     {
         routeLink: 'collection/zapatos',
-        icon: 'bi bi-bookmarks',
+        icon: 'bi bi-2-circle',
         label: 'Zapatos'
     },
     {
         routeLink: '',
-        icon: 'bi bi-bookmarks',
+        icon: 'bi bi-3-circle',
         label: 'Accesorios',
         items: [
             {
@@ -46,7 +46,7 @@ export const navbarData: INavbarData[] = [
     },
     {
         routeLink: '',
-        icon: 'bi bi-bookmarks',
+        icon: 'bi bi-4-circle',
         label: 'Sobre nosotros',
         items: [
         {

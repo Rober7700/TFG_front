@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CarritoService } from '../core/services/carrito.service';
 import { TokenService } from '../core/services/token.service';
+import { ModalService } from '../core/services/modal.service';
 
 @Component({
   selector: 'app-mis-pedidos',
@@ -32,4 +33,5 @@ export class MisPedidosComponent {
       })
     }
   }
+
 }

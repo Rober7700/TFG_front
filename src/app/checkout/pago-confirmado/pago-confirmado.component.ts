@@ -7,12 +7,17 @@ import { Router } from '@angular/router';
   templateUrl: './pago-confirmado.component.html',
   styleUrl: './pago-confirmado.component.css'
 })
-export class PagoConfirmadoComponent implements OnInit{
+export class PagoConfirmadoComponent implements OnInit {
 
   pedido: any = {};
+  carritoPrendas: any = [];
 
-  constructor(private carritoService: CarritoService, private router:Router){
-    this.pedido.metodoPago = "Stripe"
+  constructor(private carritoService: CarritoService, private router: Router) {
+    this.pedido.metodoPago = "Stripe";
+    this.carritoService.getPrendaAlCarrito().subscribe((res) => {
+      console.log(res);
+      this.pedido.carritoItemDtoList = res.carritoItemDtoList;
+    });
   }
 
   ngOnInit(): void {

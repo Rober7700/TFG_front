@@ -20,7 +20,6 @@ export class DetalleAdminComponent implements OnInit {
 
   constructor(private prendaService: PrendaService,
     public modalService: ModalService) {
-
   }
 
   ngOnInit() {
@@ -49,7 +48,6 @@ export class DetalleAdminComponent implements OnInit {
     }
   }
   
-
   cerrarModal() {
     this.modalService.cerrarModal();
     this.fotosSeleccionadas = null;

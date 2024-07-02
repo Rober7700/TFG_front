@@ -2,11 +2,12 @@
     <div class="d-flex flex-grow-1">
         <div class="flex-container" style="flex: 1 0 66%;">
             <div class="div-img col-12 col-lg-3">
-                <img class="custom-image" [src]="primeraFoto(carrito)" alt="{{ carrito.imagenes }}"> 
+                <img class="custom-image" [src]="primeraFoto(carrito)" alt="{{ carrito.imagenes }}" [class.sold]="carrito.vendido"> 
             </div>
             <div class="info-container">
-                <p>Prenda chulisma</p>
-                <div>
+                <div class="sold-text" *ngIf="carrito.vendido">Producto agotado</div>
+                <p *ngIf="!carrito.vendido">{{carrito.nombre}}</p>
+                <div *ngIf="!carrito.vendido">
                     <span class="original-price">Precio: {{ carrito.precioConDescuento }} €</span>
                     <span class="precio-tachado" *ngIf="carrito.precioOriginal!=carrito.precioConDescuento">{{ carrito.precioOriginal }} €</span>
                 </div>

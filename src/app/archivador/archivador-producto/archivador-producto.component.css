@@ -1,87 +1,107 @@
 .product-card-wrapper {
-    display: inline-block;
-    margin: 10px;
-  }
-  
-  .product-card-wrapper .text-part {
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .product-card-wrapper:hover .text-part {
-    transform: translateY(-0.3rem);
-  }
-  
-  .product-card-wrapper:hover {
-    box-shadow: #000000 0px 5px 10px;
-  }
-  
-  .product-card {
-    width: 15rem;
-    margin: 3px;
-    transition: all 0.3s;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .image-wrapper {
-    height: 20rem;
-    overflow: hidden;
-  }
-  
-  .product-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-  
-  .text-part {
-    padding: 10px;
-  }
-  
-  .text-part p {
-    color: grey;
-    margin: 0;
-  }
-  
-  .price-info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    /* Centra horizontalmente los elementos */
-    align-items: center;
-    /* Centra verticalmente los elementos */
-  }
-  
-  .original-price {
-    color: #999;
-    margin: 0;
-  }
-  
-  .precio-tachado {
-    margin-right: 10px;
-    text-decoration: line-through;
-    color: red;
-  }
-  
-  .prices,
-  .buttons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .buttons{
-    margin-left: 10px;
-  }
-  
-  .btn-like {
-    font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
-    margin-right: 5px;
-  }
-  
-  .btn-carrito {
-    font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
-  }
+  display: inline-block;
+  margin: 10px;
+}
+
+.product-card-wrapper .text-part {
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card-wrapper:hover .text-part {
+  transform: translateY(-0.3rem);
+}
+
+.product-card-wrapper:hover {
+  box-shadow: #000000 0px 5px 10px;
+}
+
+.product-card {
+  width: 15rem;
+  margin: 3px;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.image-wrapper {
+  height: 20rem;
+  overflow: hidden;
+}
+
+.product-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+img.sold {
+  /*filter: grayscale(100%);*/
+}
+
+.sold-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  backdrop-filter: blur(5px);
+  text-align: center;
+  line-height: 1.2;
+  max-width: 15rem;
+}
+
+.text-part {
+  padding: 10px;
+}
+
+.text-part p {
+  color: grey;
+  margin: 0;
+}
+
+.price-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Centra horizontalmente los elementos */
+  align-items: center;
+  /* Centra verticalmente los elementos */
+}
+
+.original-price {
+  color: #999;
+  margin: 0;
+}
+
+.precio-tachado {
+  margin-right: 10px;
+  text-decoration: line-through;
+  color: red;
+}
+
+.prices,
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  margin-left: 10px;
+}
+
+.btn-like {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 5px;
+}
+
+.btn-carrito {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+}

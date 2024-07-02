@@ -1,0 +1,230 @@
+.divPrincipal {
+    margin-top: 10px;
+}
+
+.div2 {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+    display: flex;
+}
+
+.section-container {
+    flex: 0 0 auto;
+    /* Hacer que el ancho del contenedor sea automático */
+    width: 70%;
+    /* Establecer el ancho del contenedor al 50% del padre */
+}
+
+.section-container2 {
+    padding-left: 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    margin-top: 0;
+    flex: 0 0 auto;
+    /* Hacer que el ancho del contenedor sea automático */
+    width: 30%;
+}
+
+.box1 {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1.25rem;
+    background-color: #f9f9f9;
+}
+
+.box1>* {
+    margin-bottom: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+    .custom-container2 {
+        margin-top: 0;
+    }
+}
+
+.box2 {
+    padding: 1.25rem;
+    /* Equivalente a p-5 de Tailwind CSS (1.25rem = 20px) */
+    border-radius: 0.375rem;
+    /* Equivalente a rounded-md de Tailwind CSS (0.375rem = 6px) */
+    /* Otros estilos opcionales */
+    /* background-color: #fff; */
+    /* Color de fondo blanco */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+.div3>*+* {
+    margin-top: 0.75rem;
+    /* Equivalente a space-y-3 de Tailwind CSS (0.75rem = 12px) */
+}
+
+.div4 {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+}
+//boton
+.btn-state {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease-in .2s;
+    gap: .5rem;
+    opacity: 0;
+}
+
+.state-default {
+    opacity: 1;
+}
+
+.state-adding, .state-failed, .state-added {
+    transform: translateY(100%);
+}
+
+
+.cart-adding .state-default, .cart-failed .state-default, .cart-added .state-default {
+    transform: translateY(-100%);
+}
+
+.cart-added .state-adding, .cart-failed .state-adding {
+    transform: translateY(-100%);
+}
+
+.cart-adding .state-default, .cart-failed .state-default, .cart-added .state-default {
+    opacity: 0;
+}
+
+.cart-adding .state-adding, .cart-added .state-added, .cart-failed .state-failed {
+    opacity: 1;
+    transform: none;
+}
+
+/* Bouncing ellipsis animation */
+.animation-ellipsis {
+    display: flex;
+    gap: 3px;
+}
+
+.dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .5);
+    animation: bouncing ease-out 1s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes bouncing {
+    0% {
+        transform: none;
+    }
+
+    33% {
+        transform: translateY(-10px);
+    }
+
+    66% {
+        transform: none;
+    }
+}
+
+/* Checkmark animation */
+.checkmark-wrapper {
+    --check-size: 30px;
+    --check-border-width: 3px;
+    --checkmark-width: calc(var(--check-size) / 2);
+    --checkmark-height: calc(var(--checkmark-width) / 2);
+    --checkmark-left: calc(var(--checkmark-width) / 2);
+    --checkmark-top: 50%;
+    --checkmark-color: rgba(255, 255, 255, .5);
+
+    display: block;
+    width: calc(var(--checkmark-width) + 5px);
+    position: relative;
+}
+
+.checkmark {
+    height: var(--checkmark-height);
+    width: var(--checkmark-width);
+    position: absolute;
+    opacity: 0;
+    left: var(--checkmark-left);
+    top: var(--checkmark-top);
+    display: block;
+    border-left: var(--check-border-width) solid var(--checkmark-color);
+    border-bottom: var(--check-border-width) solid var(--checkmark-color);
+    transform-origin: left top;
+    transform: rotate(-45deg);
+}
+
+.cart-added .checkmark {
+    animation: checkmark linear both .6s;
+}
+
+@keyframes checkmark {
+    0% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    80% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    90% {
+        height: var(--checkmark-height);
+        width: 0;
+        opacity: 1;
+    }
+
+    100% {
+        height: var(--checkmark-height);
+        width: var(--checkmark-width);
+        opacity: 1;
+    }
+}
+.x-mark {
+    height: var(--checkmark-height); /* Tamaño de la "X" */
+    width: var(--checkmark-width); /* Tamaño de la "X" */
+    position: absolute;
+    opacity: 0;
+    left: var(--checkmark-left);
+    top: var(--checkmark-top);
+    display: block;
+    transform-origin: center;
+    font-size: 2em; /* Tamaño de la "X" */
+    color: var(--checkmark-color); /* Color de la "X" */
+}
+
+.cart-failed .x-mark {
+    animation: x-mark-appear linear both .6s; /* Animación de aparición para la "X" */
+}
+
+@keyframes x-mark-appear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

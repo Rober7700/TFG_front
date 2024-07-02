@@ -6,4 +6,5 @@ export class Archivador {
     imagenes: string[];
     precioOriginal: number;
     precioConDescuento: number;
+    vendido: boolean;
 }

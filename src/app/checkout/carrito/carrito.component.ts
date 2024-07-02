@@ -8,7 +8,7 @@ import { Carrito } from '../../core/classes/carrito';
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
-  styleUrl: './carrito.component.css'
+  styleUrl: './carrito.component.scss'
 })
 export class CarritoComponent {
 
@@ -26,7 +26,6 @@ export class CarritoComponent {
 
   getCarrito() {
     this.carritoService.getPrendaAlCarrito().subscribe((res) => {
-      console.log(res)
       this.carritoPrendas = res.carritoItemDtoList;
       this.precioOriginal = res.precioOriginal;
       this.precioConDescuento = res.precioConDescuento;
@@ -40,10 +39,6 @@ export class CarritoComponent {
       }
     })
   }
-  /*
-  navigateToCheckout(){
-    this.router.navigate(["/checkout"])
-  }*/
 
   primeraFoto(carrito: Carrito): string {
     if (carrito && carrito.imagenes && carrito.imagenes.length > 0) {
@@ -51,26 +46,46 @@ export class CarritoComponent {
     } else {
       return 'http://localhost:8080/img/IconoMas.png';
     }
-  } 
+  }
 
   navigateToCheckout() {
+    const addToCartButton = document.querySelector('.btn-add-to-cart') as HTMLButtonElement;
+    addToCartButton.classList.add('cart-adding');
+    const algunaPrendaVendida = this.carritoPrendas.some((prenda: any) => prenda.vendido);
+    console.log(algunaPrendaVendida);
 
-    const items = this.carritoPrendas.map((prenda: any) => ({
-      nombre: prenda.nombre,
-      precioConDescuento: prenda.precioConDescuento,
-      imagen: this.primeraFoto(prenda)
-    }));
-    console.log(items);
-    this.http.post('http://localhost:4242/checkout', {items}).subscribe(async (res: any) => {
-      let stripe = await loadStripe('pk_test_51P8eltIQn0K4OEAqR9DCf3BZ4h61XBkQ1IGsmdZePY9RHWqyUPZ9bPw3p7YwKvhIYkd5p5bkulnIbnYePyYy8Aab00Cb0DkRFt');
-      stripe?.redirectToCheckout({
-        sessionId: res.id
-      })
-    });
+    if (algunaPrendaVendida) {
+      console.error("Error: Al menos una prenda del carrito está vendida.");
+      setTimeout(() => {
+        addToCartButton.classList.add('cart-failed');
+        addToCartButton.classList.remove('cart-adding');
+      }, 2500);
+      setTimeout(() => {
+        addToCartButton.classList.remove('cart-failed');
+      }, 5000);
+    } else {
+      const items = this.carritoPrendas.map((prenda: any) => ({
+        nombre: prenda.nombre,
+        precioConDescuento: prenda.precioConDescuento,
+        imagen: this.primeraFoto(prenda)
+      }));
+      setTimeout(() => {
+        addToCartButton.classList.add('cart-added');
+        addToCartButton.classList.remove('cart-adding');
+      }, 2500);
+      this.http.post('http://localhost:4242/checkout', { items }).subscribe(async (res: any) => {
+        let stripe = await loadStripe('pk_test_51P8eltIQn0K4OEAqR9DCf3BZ4h61XBkQ1IGsmdZePY9RHWqyUPZ9bPw3p7YwKvhIYkd5p5bkulnIbnYePyYy8Aab00Cb0DkRFt');
+        stripe?.redirectToCheckout({
+          sessionId: res.id
+        });
+      });
+      setTimeout(() => {
+        addToCartButton.classList.remove('cart-added');
+      }, 5000);
+    }
   }
 
   productoEliminado(prendaId: number) {
     this.getCarrito();
   }
-
 }

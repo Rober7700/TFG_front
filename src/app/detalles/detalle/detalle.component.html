@@ -23,7 +23,8 @@
                         </p>
                     </div>
                     <h1 class="mb-2 fs-2 fw-bold">{{prenda.nombre}}</h1>
-                    <div class="d-flex justify-content-start align-items-center" *ngIf="prenda.precioConDescuento !== prenda.precioOriginal; else showOriginalPrice">
+                    <div class="d-flex justify-content-start align-items-center"
+                        *ngIf="prenda.precioConDescuento !== prenda.precioOriginal; else showOriginalPrice">
                         <p class="lead fw-bolder m-0 fs-3 lh-1 text-danger me-2">€{{prenda.precioConDescuento}}</p>
                         <s class="lh-1 me-2"><span class="fw-bolder m-0">€94.99</span></s>
                         <p class="lead fw-bolder m-0 fs-6 lh-1 text-success">- €10.00</p>
@@ -43,31 +44,41 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-3">
-                        <button class="btn btn-dark btn-dark-chunky btn-add-to-cart flex-grow-1 me-2 text-white position-relative" (click)="addCarrito(prenda.id)">
-                            <span class="btn-state state-default">Añadir al carrito</span>
-                            <span class="btn-state state-adding">
-                                <span class="animation-ellipsis">
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
+                        <button
+                            class="btn btn-dark btn-dark-chunky btn-add-to-cart flex-grow-1 me-2 text-white position-relative"
+                            [class.disabled]="prenda.vendido" (click)="prenda.vendido ? null : addCarrito(prenda.id)">
+                            <ng-container *ngIf="!prenda.vendido">
+                                <span class="btn-state state-default">Añadir al carrito</span>
+                                <span class="btn-state state-adding">
+                                    <span class="animation-ellipsis">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </span>
+                                    Añadiendo, espere
                                 </span>
-                                Añadiendo, espere
-                            </span>
-                            <span class="btn-state state-added">
-                                <span class="checkmark-wrapper">
-                                    <span class="checkmark"></span>
+                                <span class="btn-state state-added">
+                                    <span class="checkmark-wrapper">
+                                        <span class="checkmark"></span>
+                                    </span>
+                                    Añadido al carrito!
                                 </span>
-                                Añadido al carrito!
-                            </span>
-                            <span class="btn-state state-failed">
-                                <span class="checkmark-wrapper">
-                                    <span class="x-mark"></span>
+                                <span class="btn-state state-failed">
+                                    <span class="checkmark-wrapper">
+                                        <span class="x-mark"></span>
+                                    </span>
+                                    El producto ya está en el carrito!
                                 </span>
-                                El producto ya está en el carrito!
-                            </span>                                  
+                            </ng-container>
+                            <ng-container *ngIf="prenda.vendido">
+                                Producto agotado
+                            </ng-container>
                         </button>
-                        <input id="toggle-heart" type="checkbox" *ngIf="isLogged" (click)="addArchivador(prenda.id)" />
-                        <label for="toggle-heart">❤</label>
+
+                        <div *ngIf="isLogged && !prenda.vendido">
+                            <input id="toggle-heart" type="checkbox" (click)="addArchivador(prenda.id)" />
+                            <label for="toggle-heart">❤</label>
+                        </div>
                     </div>
                     <div class="bg rounded py-2 px-3">
                         <ul class="list-group list-group-flush">

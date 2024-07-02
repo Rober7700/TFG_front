@@ -6,21 +6,17 @@
       <thead>
         <tr>
           <th *ngIf="isAdmin">Cliente</th>
-          <th>Total</th>
-          <th>Descripcion</th>
-          <th>Metodo De Pago</th>
-          <th>Direccion</th>
           <th>Fecha</th>
+          <th>Metodo De Pago</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let pedido of misPedidos; let i = index" [class.table-primary]="i % 2 !== 0">
-          <td *ngIf="isAdmin">{{ pedido.email }}</td>          
-          <td>{{ pedido.total }}</td>
-          <td>{{ pedido.descripcionFactura }}</td>
-          <td>{{ pedido.metodoPago }}</td>
-          <td>{{ pedido.direccion }}</td>
+          <td *ngIf="isAdmin">{{ pedido.email }}</td>
           <td>{{ pedido.date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ pedido.metodoPago }}</td>
+          <td>{{ pedido.precioConDescuento }} €</td>
         </tr>
       </tbody>
     </table>

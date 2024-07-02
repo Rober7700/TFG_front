@@ -6,4 +6,5 @@ export class Carrito {
     imagenes: string[];
     precioOriginal: number;
     precioConDescuento: number;
+    vendido: boolean;
 }

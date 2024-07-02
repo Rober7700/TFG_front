@@ -21,6 +21,10 @@
     /* Equivalente a h-[5rem] de Tailwind CSS */
 }
 
+img.sold {
+    filter: grayscale(100%);
+  }
+
 /* Estilos para la imagen */
 .custom-image {
     width: 100%;

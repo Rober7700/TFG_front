@@ -24,9 +24,13 @@ app.post("/checkout", async (req, res, next) => {
                 },
                 quantity: 1,
             })),
-            mode:"payment",
+            phone_number_collection: {
+                enabled: true,
+            },
+            mode: "payment",
             success_url: "http://localhost:4242/success.html",
-            cancel_url: "http://localhost:4200/carrito"
+            cancel_url: "http://localhost:4200/carrito",
+            billing_address_collection: 'required',
         });
 
         res.status(200).json(session);
@@ -34,5 +38,7 @@ app.post("/checkout", async (req, res, next) => {
         next(error);
     }
 });
+
+
 
 app.listen(4242, () => console.log('app is running on 4242'));

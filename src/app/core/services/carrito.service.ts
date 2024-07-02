@@ -57,6 +57,7 @@ export class CarritoService {
 
   finalizarPedido(finPedidoDto: any): Observable<any> {
     finPedidoDto.clienteId = localStorage.getItem(CLIENTE_ID);
+    console.log(finPedidoDto)
     return this.http.post<any>(`${this.urlEndPoint}/finPedido`, finPedidoDto, { headers: this.agregarAuth() }).pipe(
       catchError(e => {
         this.isNoAutorizado(e)

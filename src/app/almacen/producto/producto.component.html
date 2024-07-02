@@ -1,23 +1,26 @@
 <div class="product-card-wrapper">
     <div class="product-card">
-        <div class="image-wrapper"(click)="verDetalle()">
-            <carousel *ngIf="prenda?.fotos && prenda.fotos.length > 0">
-                <slide *ngFor="let foto of prenda.fotos">
-                    <img class="img-fluid" [src]="'http://localhost:8080/almacen/prendas/img/' + foto" [alt]="foto">
-                </slide>
-            </carousel>
-            <div *ngIf="!prenda?.fotos || prenda.fotos.length === 0" class="text-muted">No hay fotos disponibles</div>
+        <div class="image-wrapper" (click)="verDetalle()" (mouseenter)="showSecondPhoto()"
+            (mouseleave)="hideSecondPhoto()">
+            <div *ngIf="prenda?.fotos && prenda.fotos.length > 0">
+                <div *ngFor="let foto of prenda.fotos">
+                    <img class="img-fluid" [src]="getCurrentPhoto()" [alt]="foto">
+                </div>
+            </div>
         </div>
 
         <div class="text-part">
             <div class="price-info">
                 <div class="prices">
-                    <span class="precio-tachado" *ngIf="prenda.precioOriginal!=prenda.precioConDescuento">{{ prenda.precioOriginal }} €</span>
+                    <span class="precio-tachado" *ngIf="prenda.precioOriginal!=prenda.precioConDescuento">{{
+                        prenda.precioOriginal }} €</span>
                     <span class="original-price">{{ prenda.precioConDescuento }} €</span>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-outline-info btn-carrito" type="button" (click)="addCarrito(prenda.id)"><i class="bi bi-cart-fill"></i></button>
-                    <app-heart-button [isLiked]="isButtonHeartOn" [size]="size" *ngIf="isLogged" (click)="addArchivador(prenda.id)"></app-heart-button>
+                    <button class="btn btn-outline-info btn-carrito" type="button" (click)="addCarrito(prenda.id)"><i
+                            class="bi bi-cart-fill"></i></button>
+                    <app-heart-button [isLiked]="isButtonHeartOn" [size]="size" *ngIf="isLogged"
+                        (click)="addArchivador(prenda.id)"></app-heart-button>
                 </div>
             </div>
         </div>

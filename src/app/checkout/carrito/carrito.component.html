@@ -4,7 +4,8 @@
       <div class="box1">
         <ng-container>
           <div *ngFor="let carrito of carritoPrendas">
-            <app-carrito-producto [carrito]="carrito" (productoEliminado)="productoEliminado($event)"></app-carrito-producto>
+            <app-carrito-producto [carrito]="carrito"
+              (productoEliminado)="productoEliminado($event)"></app-carrito-producto>
           </div>
         </ng-container>
       </div>
@@ -32,7 +33,32 @@
               <span>{{precioConDescuento}} €</span>
             </div>
           </div>
-          <button class="boton-checkout" (click)="navigateToCheckout()">Checkout</button>
+          <button class="btn btn-dark btn-dark-chunky btn-add-to-cart flex-grow-1 me-2 text-white position-relative w-100 py-4 my-2"
+          (click)="navigateToCheckout()">
+            <ng-container>
+              <span class="btn-state state-default">Checkout</span>
+              <span class="btn-state state-adding">
+                <span class="animation-ellipsis">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </span>
+                Redirigiendo
+              </span>
+              <span class="btn-state state-added">
+                <span class="checkmark-wrapper">
+                  <span class="checkmark"></span>
+                </span>
+                Exito!
+              </span>
+              <span class="btn-state state-failed">
+                <span class="checkmark-wrapper">
+                  <span class="x-mark"></span>
+                </span>
+                Hay artículos agotados!
+              </span>
+            </ng-container>
+          </button>
         </div>
       </ng-container>
     </section>

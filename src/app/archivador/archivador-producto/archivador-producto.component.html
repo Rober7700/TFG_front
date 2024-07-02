@@ -1,9 +1,10 @@
 <div class="product-card-wrapper">
     <div class="product-card">
-        <div class="image-wrapper"(click)="verDetalle()">
+        <div class="image-wrapper" (click)="verDetalle()">
             <carousel *ngIf="prenda?.imagenes && prenda.imagenes.length > 0">
                 <slide *ngFor="let foto of prenda.imagenes">
-                    <img class="img-fluid" [src]="'http://localhost:8080/almacen/prendas/img/' + foto" [alt]="foto">
+                    <img class="img-fluid" [src]="'http://localhost:8080/almacen/prendas/img/' + foto" [alt]="foto" [class.sold]="prenda.vendido">
+                    <div class="sold-text" *ngIf="prenda.vendido">Producto vendido</div>
                 </slide>
             </carousel>
             <div *ngIf="!prenda?.imagenes || prenda.imagenes.length === 0" class="text-muted">No hay fotos disponibles</div>
@@ -16,7 +17,7 @@
                     <span class="original-price">{{ prenda.precioConDescuento }} €</span>
                 </div>
                 <div class="buttons">
-                    <button class="btn btn-outline-info btn-carrito" type="button" (click)="addCarrito(prenda.prendaId)"><i class="bi bi-cart-fill"></i></button>
+                    <button class="btn btn-outline-info btn-carrito" type="button" *ngIf="!prenda.vendido" (click)="addCarrito(prenda.prendaId)"><i class="bi bi-cart-fill"></i></button>
                     <button class="btn btn-outline-success btn-like" type="button" (click)="delete(prenda.prendaId)"><i class="bi bi-x"></i></button>
                 </div>
             </div>
